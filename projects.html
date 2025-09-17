@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - 어스컴퍼니(신윤재)</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">어스컴퍼니</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="movieTMDB.html">Movies</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero" style="padding: 4rem 2rem; min-height: auto;">
+            <div class="hero-content">
+                <h1>My Projects</h1>
+                <p>수의학과 기술을 연결하는 프로젝트들</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="grid grid-2">
+                    <div class="card project-card">
+                        <div class="project-status" style="background-color: #10b981;">배포 중</div>
+                        <h3 class="project-title">🔍 펫글링</h3>
+                        <p>반려동물 영양제 성분 데이터베이스 검색 엔진</p>
+                        <button onclick="openProject('https://petgling-webapp-new.vercel.app/')" class="btn">라이브 데모</button>
+                    </div>
+
+                    <div class="card project-card">
+                        <div class="project-status" style="background-color: #f59e0b;">테스트 중</div>
+                        <h3 class="project-title">💰 별빛지갑 v.1.1</h3>
+                        <p>어린이 용돈 관리 안드로이드 앱</p>
+                        <span class="btn" style="background-color: #ccc;">비공개 테스트</span>
+                    </div>
+
+                    <div class="card project-card">
+                        <div class="project-status" style="background-color: #8b5cf6;">진행 중</div>
+                        <h3 class="project-title">📖 AI 자서전 만들기</h3>
+                        <p>AI 기반 자서전 작성 웹앱 서비스</p>
+                        <span class="btn" style="background-color: #ccc;">개발 중</span>
+                    </div>
+
+                    <div class="card project-card">
+                        <div class="project-status" style="background-color: #06b6d4;">개발 중</div>
+                        <h3 class="project-title">📱 Tiny Routine Tracker</h3>
+                        <p>일상 루틴 관리 안드로이드 앱</p>
+                        <span class="btn" style="background-color: #ccc;">개발 중</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 어스컴퍼니(신윤재). 바이브코딩과 함께 성장하는 개발자.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

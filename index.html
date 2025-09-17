@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>어스컴퍼니(신윤재) - 바이브코더 포트폴리오</title>
+    <meta name="description" content="현직 수의사에서 풀스택 바이브코더로 성장하는 어스컴퍼니의 포트폴리오입니다.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+</head>
+<body>
+    <!-- 네비게이션 -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">어스컴퍼니</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="movieTMDB.html">Movies</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 -->
+    <main>
+        <!-- 히어로 섹션 -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Hello World!</h1>
+                <p>안녕하세요, <strong>어스컴퍼니(신윤재)</strong>입니다</p>
+                <p class="subtitle">현직 수의사이지만 풀스택 바이브코더가 꿈입니다</p>
+                <div style="margin-top: 2rem;">
+                    <a href="projects.html" class="btn">프로젝트 보기</a>
+                    <a href="about.html" class="btn btn-secondary" style="margin-left: 1rem;">더 알아보기</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 간단한 소개 섹션 -->
+        <section class="section">
+            <div class="container">
+                <div class="grid grid-3">
+                    <div class="card">
+                        <h3 style="color: var(--deep-blue); margin-bottom: 1rem;">🩺 현재</h3>
+                        <p>현직 수의사로 일하며 동물들의 건강을 돌보고 있습니다.</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: var(--deep-blue); margin-bottom: 1rem;">💻 학습중</h3>
+                        <p>코딩알려주는 누나 바이브코딩 1기 수강 중이며, 풀스택 개발자로 성장하고 있습니다.</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: var(--deep-blue); margin-bottom: 1rem;">🚀 미래</h3>
+                        <p>반려동물과 기술을 연결하는 혁신적인 서비스를 만드는 것이 꿈입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 주요 프로젝트 미리보기 -->
+        <section class="section" style="background-color: var(--gray-100);">
+            <div class="container">
+                <h2 class="section-title">주요 프로젝트</h2>
+                <div class="grid grid-2">
+                    <div class="card project-card">
+                        <div class="project-status">배포 중</div>
+                        <h3 class="project-title">펫글링 (반려동물 영양제 검색)</h3>
+                        <p>반려동물 영양제 성분 데이터베이스 검색 엔진으로 현재 Vercel에 배포되어 있습니다.</p>
+                        <div style="margin-top: 1rem;">
+                            <button onclick="openProject('https://petgling-webapp-new.vercel.app/')" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">프로젝트 보기</button>
+                        </div>
+                    </div>
+                    <div class="card project-card">
+                        <div class="project-status">개발 중</div>
+                        <h3 class="project-title">별빛지갑 v.1.1</h3>
+                        <p>어린이의 용돈을 관리해주는 안드로이드 앱으로 현재 비공개 테스트 중입니다.</p>
+                        <div style="margin-top: 1rem;">
+                            <a href="projects.html" class="btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">더 보기</a>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="projects.html" class="btn">모든 프로젝트 보기</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA 섹션 -->
+        <section class="section">
+            <div class="container">
+                <div style="text-align: center; padding: 3rem; background: linear-gradient(135deg, var(--deep-blue) 0%, var(--light-blue) 100%); border-radius: 12px; color: white;">
+                    <h2 style="margin-bottom: 1rem;">함께 성장하고 싶습니다</h2>
+                    <p style="margin-bottom: 2rem; opacity: 0.9;">수의학과 개발의 융합으로 더 나은 세상을 만들어가고 싶습니다.</p>
+                    <a href="contact.html" class="btn">연락하기</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 어스컴퍼니(신윤재). 바이브코딩과 함께 성장하는 개발자.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
