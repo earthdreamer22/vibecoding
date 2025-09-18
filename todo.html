@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>투두 리스트 | 어스컴퍼니</title>
+    <meta name="description" content="Firebase Realtime Database와 연동되는 어스컴퍼니의 투두 리스트 웹앱입니다.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/todo.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗒️</text></svg>">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">어스컴퍼니</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="movieTMDB.html">Movies</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="todo.html">Todo</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="todo-hero">
+            <div class="container">
+                <div class="todo-hero-card card">
+                    <h1>나의 투두 리스트</h1>
+                    <p>하루의 작은 성취를 기록하고, 우선순위와 기한을 잊지 않도록 정리해보세요.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="todo-section">
+            <div class="container">
+                <div class="todo-grid">
+                    <div class="card">
+                        <form id="todo-form" class="todo-form">
+                            <input type="hidden" id="editingId" value="">
+                            <div class="form-row">
+                                <label for="taskInput">할 일</label>
+                                <input type="text" id="taskInput" name="task" placeholder="예) Firebase 규칙 확인하기" autocomplete="off" required>
+                            </div>
+                            <div class="form-row form-row-inline">
+                                <div class="form-field">
+                                    <label for="prioritySelect">우선순위</label>
+                                    <select id="prioritySelect" name="priority">
+                                        <option value="high">높음</option>
+                                        <option value="medium" selected>보통</option>
+                                        <option value="low">낮음</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label for="dueDateInput">마감일</label>
+                                    <input type="date" id="dueDateInput" name="dueDate">
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn" id="submitButton">등록하기</button>
+                                <button type="button" class="btn btn-secondary hidden" id="cancelEdit">수정 취소</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card todo-stats">
+                        <div class="stats-row">
+                            <div class="stat">
+                                <span class="stat-label">전체</span>
+                                <span class="stat-value" id="totalCount">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">진행 중</span>
+                                <span class="stat-value" id="activeCount">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">완료</span>
+                                <span class="stat-value" id="completedCount">0</span>
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card todo-list-card">
+                    <div class="todo-list-header">
+                        <h2>투두 목록</h2>
+                        <span class="todo-count" id="listCountLabel">총 0건</span>
+                    </div>
+                    <ul class="todo-list" id="todoList"></ul>
+                    <p class="empty-state" id="emptyState">등록된 할 일이 없습니다. 새로운 할 일을 추가해보세요!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 어스컴퍼니(신윤재). 바이브코딩과 함께 성장하는 개발자.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js" defer></script>
+    <script type="module" src="js/todo.js"></script>
+</body>
+</html>
