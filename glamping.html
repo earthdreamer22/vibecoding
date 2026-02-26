@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대구 근교 아이와 함께하는 글램핑 & 캠핑장 20선</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .filter-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .search-box {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .search-box input {
+            width: 100%;
+            max-width: 500px;
+            padding: 15px 25px;
+            font-size: 1.1em;
+            border: 2px solid #667eea;
+            border-radius: 30px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            border-color: #764ba2;
+        }
+
+        .camping-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .camping-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .camping-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+        }
+
+        .card-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .card-location {
+            font-size: 0.9em;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-body {
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            padding: 6px 14px;
+            background: #f0f4ff;
+            color: #667eea;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .features {
+            margin: 15px 0;
+            color: #555;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+
+        .features li {
+            margin-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-size: 1.3em;
+            color: #667eea;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .booking-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .booking-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .contact {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            margin-top: 50px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .camping-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-buttons {
+                flex-direction: column;
+            }
+
+            .filter-btn {
+                width: 100%;
+            }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .no-results h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏕️ 대구 근교 아이와 함께하는 글램핑 & 캠핑장 20선</h1>
+            <p>가족과 함께 특별한 추억을 만들어보세요</p>
+        </header>
+
+        <div class="filter-container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">전체 보기</button>
+                <button class="filter-btn" data-filter="대구">대구</button>
+                <button class="filter-btn" data-filter="영천">영천</button>
+                <button class="filter-btn" data-filter="칠곡">칠곡</button>
+                <button class="filter-btn" data-filter="달성">달성</button>
+                <button class="filter-btn" data-filter="청도">청도</button>
+                <button class="filter-btn" data-filter="경산">경산</button>
+                <button class="filter-btn" data-filter="군위">군위</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 캠핑장 이름이나 특징으로 검색하세요...">
+            </div>
+        </div>
+
+        <div class="camping-grid" id="campingGrid">
+            <!-- 캠핑장 카드 1 -->
+            <div class="camping-card" data-region="영천" data-keywords="글램핑 수영장 온수풀 가족">
+                <div class="card-header">
+                    <h3>영천 아우노펠리스 글램핑</h3>
+                    <div class="card-location">📍 경북 영천시 상신기길 150</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🏊 수영장</span>
+                        <span class="tag">🔥 온수풀</span>
+                        <span class="tag">👨‍👩‍👧‍👦 가족 추천</span>
+                    </div>
+                    <ul class="features">
+                        <li>성인/유아 풀 (하절기/동절기 온수풀)</li>
+                        <li>편의점 & 카페 완비</li>
+                        <li>바닥 난방 + 에어컨 설치</li>
+                        <li>개별 화장실 & 샤워실</li>
+                    </ul>
+                    <div class="price">₩120,000~</div>
+                    <a href="https://site.onda.me/%EC%98%81%EC%B2%9C-%EC%95%84%EC%9A%B0%EB%85%B8-%ED%8E%A0%EB%A6%AC%EC%8A%A4-%EA%B8%80%EB%9E%A8%ED%95%91-109722/roomtypes" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 온다 예약 플랫폼</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 2 -->
+            <div class="camping-card" data-region="달성" data-keywords="글램핑 카라반 할인 카페">
+                <div class="card-header">
+                    <h3>라운드힐 905</h3>
+                    <div class="card-location">📍 대구 달성군 가창면 주리2길 42</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🚐 카라반</span>
+                        <span class="tag">☕ 카페 할인</span>
+                        <span class="tag">🌲 자연 친화</span>
+                    </div>
+                    <ul class="features">
+                        <li>주리485카페 20% 할인</li>
+                        <li>카라반 연박시 2만원 자동 할인</li>
+                        <li>깨끗한 시설 관리</li>
+                        <li>가창 산속 조용한 환경</li>
+                    </ul>
+                    <div class="price">₩90,000~</div>
+                    <a href="tel:0507-1344-9795" class="booking-btn">
+                        전화 예약하기 →
+                    </a>
+                    <div class="contact">📞 0507-1344-9795</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 3 -->
+            <div class="camping-card" data-region="칠곡" data-keywords="글램핑 팔공산 당일 감성">
+                <div class="card-header">
+                    <h3>팔공산 글램핑</h3>
+                    <div class="card-location">📍 경북 칠곡 팔공산</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🏔️ 팔공산</span>
+                        <span class="tag">✨ 감성 글램핑</span>
+                        <span class="tag">🌅 당일치기</span>
+                    </div>
+                    <ul class="features">
+                        <li>대구·구미 근교 접근성 우수</li>
+                        <li>당일 글램핑 & 캠프닉</li>
+                        <li>자연 속 힐링 최적화</li>
+                        <li>가족·커플 모두 추천</li>
+                    </ul>
+                    <div class="price">₩100,000~</div>
+                    <a href="https://www.xn--ob0bvty5ugmjs8wm8c.com/" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 공식 웹사이트 문의</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 4 -->
+            <div class="camping-card" data-region="대구" data-keywords="캠핑 달서구 별빛 도심">
+                <div class="card-header">
+                    <h3>달서별빛캠프 캠핑장</h3>
+                    <div class="card-location">📍 대구 달서구</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🌟 별빛 캠프</span>
+                        <span class="tag">🏙️ 도심 접근</span>
+                        <span class="tag">🎪 레크레이션</span>
+                    </div>
+                    <ul class="features">
+                        <li>대구 도심 위치 (접근성 최고)</li>
+                        <li>별 모양 조형물 & 물놀이장</li>
+                        <li>체육시설 완비</li>
+                        <li>카라반 14 + 데크 26 + 오토 15</li>
+                    </ul>
+                    <div class="price">₩50,000~</div>
+                    <a href="https://dalseocamp.kr/" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 공식 웹사이트 예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 5 -->
+            <div class="camping-card" data-region="달성" data-keywords="글램핑 오토캠핑 식당 찜질방">
+                <div class="card-header">
+                    <h3>가창농원 글램핑&오토캠핑장</h3>
+                    <div class="card-location">📍 대구 달성군 가창면</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🌲 숲속 캠핑</span>
+                        <span class="tag">🍖 식당 운영</span>
+                        <span class="tag">♨️ 찜질방</span>
+                    </div>
+                    <ul class="features">
+                        <li>숲속 자연 환경</li>
+                        <li>참숯 가마 찜질방</li>
+                        <li>8가지 메뉴 식당 운영</li>
+                        <li>파쇄석 일반 야영장</li>
+                    </ul>
+                    <div class="price">₩70,000~</div>
+                    <a href="https://www.campingtalk.me/booking/camp/2660" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 캠핑톡 예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 6 -->
+            <div class="camping-card" data-region="청도" data-keywords="글램핑 신축 마운틴뷰 감성">
+                <div class="card-header">
+                    <h3>퍼즈 글램핑</h3>
+                    <div class="card-location">📍 경북 청도군</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🏔️ 마운틴뷰</span>
+                        <span class="tag">🆕 신축</span>
+                        <span class="tag">✨ 감성 공간</span>
+                    </div>
+                    <ul class="features">
+                        <li>2024년 신축 시설</li>
+                        <li>예술적인 마운틴뷰</li>
+                        <li>대구 근교 접근성 우수</li>
+                        <li>감성 인테리어</li>
+                    </ul>
+                    <div class="price">₩130,000~</div>
+                    <a href="https://www.yeogi.com/accommodation/camping/kr/%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84/%EC%B2%AD%EB%8F%84%EA%B5%B0" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 여기어때 예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 7 -->
+            <div class="camping-card" data-region="군위" data-keywords="캠핑 아이놀이터 가족">
+                <div class="card-header">
+                    <h3>군위 캠프 301</h3>
+                    <div class="card-location">📍 경북 군위군</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🎡 놀이터</span>
+                        <span class="tag">👶 아이 특화</span>
+                        <span class="tag">🏕️ 오토캠핑</span>
+                    </div>
+                    <ul class="features">
+                        <li>아이들 놀이시설 특화</li>
+                        <li>가족 친화적 환경</li>
+                        <li>넓은 야영 공간</li>
+                        <li>안전한 캠핑장 운영</li>
+                    </ul>
+                    <div class="price">₩60,000~</div>
+                    <a href="https://yeyak.daegu.go.kr/yeyak/camp/campListView.do" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 대구시 통합예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 8 -->
+            <div class="camping-card" data-region="영천" data-keywords="글램핑 별자리 감성">
+                <div class="card-header">
+                    <h3>영천 채송화 글램핑</h3>
+                    <div class="card-location">📍 경북 영천시</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">⭐ 별자리</span>
+                        <span class="tag">✨ 깨끗한 시설</span>
+                        <span class="tag">🌙 감성 글램핑</span>
+                    </div>
+                    <ul class="features">
+                        <li>별자리 관측 최적지</li>
+                        <li>깨끗한 시설 & 서비스</li>
+                        <li>로맨틱한 분위기</li>
+                        <li>가족·커플 모두 적합</li>
+                    </ul>
+                    <div class="price">₩110,000~</div>
+                    <a href="https://www.yeogi.com/accommodation/camping/kr/%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84/%EC%98%81%EC%B2%9C%EC%8B%9C" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 여기어때 예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 9 -->
+            <div class="camping-card" data-region="영천" data-keywords="글램핑 자연 한적">
+                <div class="card-header">
+                    <h3>영천 솔롱고 글램핑</h3>
+                    <div class="card-location">📍 경북 영천시 금호읍</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🌲 자연 속</span>
+                        <span class="tag">🏞️ 한적한 환경</span>
+                        <span class="tag">🚗 접근성</span>
+                    </div>
+                    <ul class="features">
+                        <li>영천시청 20분 거리</li>
+                        <li>한적한 시골 마을</li>
+                        <li>자연 조화 환경</li>
+                        <li>조용한 힐링 공간</li>
+                    </ul>
+                    <div class="price">₩95,000~</div>
+                    <a href="https://www.yeogi.com/accommodation/camping/kr/%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84/%EC%98%81%EC%B2%9C%EC%8B%9C" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 여기어때 예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 10 -->
+            <div class="camping-card" data-region="달성" data-keywords="호텔 텐트 럭셔리">
+                <div class="card-header">
+                    <h3>호텔 드포레 텐트빌리지</h3>
+                    <div class="card-location">📍 대구 달성군</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🏨 호텔급</span>
+                        <span class="tag">⛺ 텐트 빌리지</span>
+                        <span class="tag">💎 럭셔리</span>
+                    </div>
+                    <ul class="features">
+                        <li>호텔급 서비스</li>
+                        <li>럭셔리 텐트 시설</li>
+                        <li>프리미엄 글램핑</li>
+                        <li>완벽한 편의시설</li>
+                    </ul>
+                    <div class="price">₩150,000~</div>
+                    <a href="https://www.5gcamp.com/?c=camping&m=camping&cate1=%EB%8C%80%EA%B5%AC" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 5gcamp 예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 11 -->
+            <div class="camping-card" data-region="달성" data-keywords="글램핑 모던">
+                <div class="card-header">
+                    <h3>오투 글램핑</h3>
+                    <div class="card-location">📍 대구 달성군</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🎨 모던 디자인</span>
+                        <span class="tag">🌟 깨끗한 시설</span>
+                        <span class="tag">👨‍👩‍👧 가족 추천</span>
+                    </div>
+                    <ul class="features">
+                        <li>모던한 인테리어</li>
+                        <li>깨끗하게 관리된 시설</li>
+                        <li>편안한 글램핑 경험</li>
+                        <li>가족 단위 최적</li>
+                    </ul>
+                    <div class="price">₩105,000~</div>
+                    <a href="https://www.5gcamp.com/?c=camping&m=camping&cate1=%EB%8C%80%EA%B5%AC" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 5gcamp 예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 12 -->
+            <div class="camping-card" data-region="경산" data-keywords="캠핑 자연">
+                <div class="card-header">
+                    <h3>경산 자연캠핑장</h3>
+                    <div class="card-location">📍 경북 경산시</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🏞️ 자연</span>
+                        <span class="tag">🏕️ 오토캠핑</span>
+                        <span class="tag">🚗 접근 용이</span>
+                    </div>
+                    <ul class="features">
+                        <li>경산 자연환경</li>
+                        <li>대구 근교 접근성</li>
+                        <li>오토캠핑 특화</li>
+                        <li>넓은 캠핑 사이트</li>
+                    </ul>
+                    <div class="price">₩55,000~</div>
+                    <a href="https://www.yeogi.com/accommodation/camping/kr/%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84/%EA%B2%BD%EC%82%B0%EC%8B%9C" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 여기어때 예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 13 -->
+            <div class="camping-card" data-region="대구" data-keywords="펜션 글램핑 복합">
+                <div class="card-header">
+                    <h3>대구쉼 펜션 글램핑</h3>
+                    <div class="card-location">📍 대구광역시</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🏡 펜션+글램핑</span>
+                        <span class="tag">😌 힐링</span>
+                        <span class="tag">🌿 자연</span>
+                    </div>
+                    <ul class="features">
+                        <li>펜션과 글램핑 복합</li>
+                        <li>다양한 숙박 옵션</li>
+                        <li>힐링 최적 환경</li>
+                        <li>대구 도심 인근</li>
+                    </ul>
+                    <div class="price">₩80,000~</div>
+                    <a href="https://ozycamping.com/" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 공식 웹사이트</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 14 -->
+            <div class="camping-card" data-region="대구" data-keywords="캠핑 북구 공공">
+                <div class="card-header">
+                    <h3>대구 북구 캠핑장</h3>
+                    <div class="card-location">📍 대구 북구</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🏛️ 공공 캠핑장</span>
+                        <span class="tag">💰 저렴한 가격</span>
+                        <span class="tag">🏕️ 시설 완비</span>
+                    </div>
+                    <ul class="features">
+                        <li>북구청 운영 공공 캠핑장</li>
+                        <li>합리적인 가격</li>
+                        <li>안전한 시설 관리</li>
+                        <li>도심 접근성</li>
+                    </ul>
+                    <div class="price">₩30,000~</div>
+                    <a href="https://www.buk.daegu.kr/reserve/index.do?menu_id=00002981" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 북구청 통합예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 15 -->
+            <div class="camping-card" data-region="대구" data-keywords="캠핑 동구">
+                <div class="card-header">
+                    <h3>대구 동산오토캠핑장</h3>
+                    <div class="card-location">📍 대구 동구</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🚗 오토캠핑</span>
+                        <span class="tag">🏕️ 전통 캠핑</span>
+                        <span class="tag">👨‍👩‍👧‍👦 가족</span>
+                    </div>
+                    <ul class="features">
+                        <li>오토캠핑 전용</li>
+                        <li>편리한 차량 접근</li>
+                        <li>가족 캠핑 최적</li>
+                        <li>안전한 환경</li>
+                    </ul>
+                    <div class="price">₩45,000~</div>
+                    <a href="https://www.5gcamp.com/?c=camping&m=camping&cate1=%EB%8C%80%EA%B5%AC" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 5gcamp 예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 16 -->
+            <div class="camping-card" data-region="대구" data-keywords="캠핑 논논 감성">
+                <div class="card-header">
+                    <h3>논논 캠프</h3>
+                    <div class="card-location">📍 대구 근교</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🌾 논밭 테마</span>
+                        <span class="tag">✨ 감성</span>
+                        <span class="tag">📸 포토존</span>
+                    </div>
+                    <ul class="features">
+                        <li>논밭 감성 캠핑</li>
+                        <li>인스타그래머블 포토존</li>
+                        <li>독특한 테마</li>
+                        <li>젊은 층에 인기</li>
+                    </ul>
+                    <div class="price">₩75,000~</div>
+                    <a href="https://www.yeogi.com/accommodation/camping/kr/%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 여기어때 예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 17 -->
+            <div class="camping-card" data-region="대구" data-keywords="캠핑 일랑일랑 감성">
+                <div class="card-header">
+                    <h3>일랑일랑 캠핑장</h3>
+                    <div class="card-location">📍 대구 근교</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🌺 일랑일랑</span>
+                        <span class="tag">🌸 꽃향기</span>
+                        <span class="tag">✨ 감성</span>
+                    </div>
+                    <ul class="features">
+                        <li>아로마 테라피 분위기</li>
+                        <li>감성적인 캠핑</li>
+                        <li>여성 친화적 환경</li>
+                        <li>깨끗한 시설</li>
+                    </ul>
+                    <div class="price">₩85,000~</div>
+                    <a href="https://www.yeogi.com/accommodation/camping/kr/%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 여기어때 예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 18 -->
+            <div class="camping-card" data-region="대구" data-keywords="캠핑 진밭골 계곡">
+                <div class="card-header">
+                    <h3>진밭골 캠핑장</h3>
+                    <div class="card-location">📍 대구 근교</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">🏞️ 계곡</span>
+                        <span class="tag">💧 물놀이</span>
+                        <span class="tag">🌲 숲속</span>
+                    </div>
+                    <ul class="features">
+                        <li>계곡 물놀이 가능</li>
+                        <li>여름철 최적</li>
+                        <li>숲속 캠핑</li>
+                        <li>자연 친화적</li>
+                    </ul>
+                    <div class="price">₩50,000~</div>
+                    <a href="https://www.yeogi.com/accommodation/camping/kr/%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 여기어때 예약</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 19 -->
+            <div class="camping-card" data-region="대구" data-keywords="글램핑 로망 감성">
+                <div class="card-header">
+                    <h3>글램핑로망</h3>
+                    <div class="card-location">📍 대구 근교</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">💕 로맨틱</span>
+                        <span class="tag">✨ 감성</span>
+                        <span class="tag">📸 인스타</span>
+                    </div>
+                    <ul class="features">
+                        <li>로맨틱한 분위기</li>
+                        <li>감성 글램핑</li>
+                        <li>SNS 인기 장소</li>
+                        <li>커플·가족 모두 적합</li>
+                    </ul>
+                    <div class="price">₩115,000~</div>
+                    <a href="https://www.instagram.com/glamping_roman/" target="_blank" class="booking-btn">
+                        인스타그램 보기 →
+                    </a>
+                    <div class="contact">📞 Instagram DM 문의</div>
+                </div>
+            </div>
+
+            <!-- 캠핑장 카드 20 -->
+            <div class="camping-card" data-region="대구" data-keywords="글램핑 포엠 감성">
+                <div class="card-header">
+                    <h3>글램핑포엠</h3>
+                    <div class="card-location">📍 대구 근교</div>
+                </div>
+                <div class="card-body">
+                    <div class="tags">
+                        <span class="tag">📝 시적 감성</span>
+                        <span class="tag">🌙 낭만</span>
+                        <span class="tag">✨ 힐링</span>
+                    </div>
+                    <ul class="features">
+                        <li>시적인 분위기</li>
+                        <li>낭만적인 글램핑</li>
+                        <li>감성 충만 공간</li>
+                        <li>힐링 최적화</li>
+                    </ul>
+                    <div class="price">₩125,000~</div>
+                    <a href="https://www.yeogi.com/accommodation/camping/kr/%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C" target="_blank" class="booking-btn">
+                        지금 예약하기 →
+                    </a>
+                    <div class="contact">📞 여기어때 예약</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="no-results" id="noResults" style="display: none;">
+            <h2>😢 검색 결과가 없습니다</h2>
+            <p>다른 검색어로 다시 시도해보세요</p>
+        </div>
+
+        <footer>
+            <p>🏕️ 대구 근교 글램핑 & 캠핑장 가이드</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">
+                ※ 가격 및 예약 가능 여부는 시즌에 따라 변동될 수 있습니다.<br>
+                예약 전 해당 캠핑장에 직접 문의하시기 바랍니다.
+            </p>
+            <p style="margin-top: 15px; color: #999;">
+                제작일: 2026년 2월 | 가족과 함께하는 특별한 추억 만들기 ❤️
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // 필터 기능
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const campingCards = document.querySelectorAll('.camping-card');
+        const noResults = document.getElementById('noResults');
+        const campingGrid = document.getElementById('campingGrid');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // 버튼 활성화 상태 변경
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filter = button.dataset.filter;
+                let visibleCount = 0;
+
+                campingCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.region === filter) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // 검색 결과 없음 표시
+                if (visibleCount === 0) {
+                    campingGrid.style.display = 'none';
+                    noResults.style.display = 'block';
+                } else {
+                    campingGrid.style.display = 'grid';
+                    noResults.style.display = 'none';
+                }
+            });
+        });
+
+        // 검색 기능
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            let visibleCount = 0;
+
+            campingCards.forEach(card => {
+                const cardText = card.textContent.toLowerCase();
+                const keywords = card.dataset.keywords.toLowerCase();
+
+                if (cardText.includes(searchTerm) || keywords.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // 검색 결과 없음 표시
+            if (visibleCount === 0) {
+                campingGrid.style.display = 'none';
+                noResults.style.display = 'block';
+            } else {
+                campingGrid.style.display = 'grid';
+                noResults.style.display = 'none';
+            }
+
+            // 검색 시 필터 초기화
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            filterButtons[0].classList.add('active');
+        });
+
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 카드 애니메이션
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        campingCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
