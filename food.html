@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘 밥 뭐먹지? - 어스컴퍼니</title>
+    <meta name="description" content="오늘 뭐 먹을지 고민될 때! 한식·중식·양식·패스트푸드 100가지 메뉴 중 랜덤 추천">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+    <style>
+        /* 음식 추천 페이지 전용 스타일 */
+        .food-hero {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ffcd3c 100%);
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            color: white;
+        }
+
+        .food-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .food-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 카테고리 필터 */
+        .category-section {
+            padding: 2rem;
+            background: white;
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 68px;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .category-buttons {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cat-btn {
+            padding: 0.6rem 1.5rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 50px;
+            background: white;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--gray-700);
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cat-btn:hover {
+            border-color: var(--light-blue);
+            color: var(--light-blue);
+        }
+
+        .cat-btn.active {
+            background: var(--deep-blue);
+            border-color: var(--deep-blue);
+            color: white;
+        }
+
+        .cat-btn.korean.active { background: #e53e3e; border-color: #e53e3e; }
+        .cat-btn.chinese.active { background: #dd6b20; border-color: #dd6b20; }
+        .cat-btn.western.active { background: #2b6cb0; border-color: #2b6cb0; }
+        .cat-btn.fastfood.active { background: #276749; border-color: #276749; }
+
+        /* 추천 결과 카드 */
+        .result-section {
+            padding: 3rem 2rem;
+            background: var(--gray-100);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 4rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            max-width: 500px;
+            width: 100%;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+        }
+
+        .result-card.spinning {
+            animation: spinIn 0.4s ease;
+        }
+
+        @keyframes spinIn {
+            0% { transform: scale(0.8) rotate(-5deg); opacity: 0; }
+            60% { transform: scale(1.05) rotate(2deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .result-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .result-category {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .cat-korean { background: #fff5f5; color: #e53e3e; }
+        .cat-chinese { background: #fffaf0; color: #dd6b20; }
+        .cat-western { background: #ebf8ff; color: #2b6cb0; }
+        .cat-fastfood { background: #f0fff4; color: #276749; }
+
+        .result-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-desc {
+            font-size: 1rem;
+            color: var(--gray-700);
+            margin-bottom: 2rem;
+        }
+
+        .result-placeholder {
+            text-align: center;
+            color: var(--gray-700);
+        }
+
+        .result-placeholder .big-emoji {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* 메인 추천 버튼 */
+        .spin-section {
+            padding: 2rem;
+            text-align: center;
+            background: white;
+        }
+
+        .spin-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .spin-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
+        }
+
+        .spin-btn:active {
+            transform: translateY(0);
+        }
+
+        .spin-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* 음식 목록 그리드 */
+        .food-list-section {
+            padding: 3rem 2rem;
+            background: white;
+        }
+
+        .food-list-section h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--gray-900);
+        }
+
+        .food-list-subtitle {
+            text-align: center;
+            color: var(--gray-700);
+            margin-bottom: 2rem;
+        }
+
+        .category-group {
+            max-width: 1100px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .category-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .category-count {
+            background: var(--gray-100);
+            border-radius: 50px;
+            padding: 0.2rem 0.75rem;
+            font-size: 0.8rem;
+            color: var(--gray-700);
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .food-item {
+            background: var(--gray-100);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .food-item:hover {
+            background: white;
+            border-color: var(--light-blue);
+            color: var(--deep-blue);
+            font-weight: 500;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .food-item.highlighted {
+            background: #fef3c7;
+            border-color: #f59e0b;
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .food-hero h1 { font-size: 2rem; }
+            .result-card { padding: 2rem; }
+            .result-name { font-size: 2rem; }
+            .spin-btn { font-size: 1.1rem; padding: 1rem 2rem; }
+            .food-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 네비게이션 -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">어스컴퍼니</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="food.html" style="color: var(--deep-blue); font-weight: 600;">밥뭐먹지?</a></li>
+                <li><a href="movieTMDB.html">Movies</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 -->
+    <section class="food-hero">
+        <h1>🍽️ 오늘 밥 뭐먹지?</h1>
+        <p>한식 · 중식 · 양식 · 패스트푸드 합계 <strong>100가지</strong> 메뉴 중 랜덤 추천!</p>
+        <p>고민은 그만, 지금 바로 돌려보세요 🎰</p>
+    </section>
+
+    <!-- 카테고리 필터 -->
+    <section class="category-section">
+        <div class="category-buttons">
+            <button class="cat-btn active" data-cat="all" onclick="setCategory('all', this)">🍽️ 전체 (100)</button>
+            <button class="cat-btn korean" data-cat="korean" onclick="setCategory('korean', this)">🥢 한식 (25)</button>
+            <button class="cat-btn chinese" data-cat="chinese" onclick="setCategory('chinese', this)">🥡 중식 (25)</button>
+            <button class="cat-btn western" data-cat="western" onclick="setCategory('western', this)">🍝 양식 (25)</button>
+            <button class="cat-btn fastfood" data-cat="fastfood" onclick="setCategory('fastfood', this)">🍔 패스트푸드 (25)</button>
+        </div>
+    </section>
+
+    <!-- 추천 결과 -->
+    <section class="result-section">
+        <div class="result-card" id="resultCard">
+            <div class="result-placeholder">
+                <span class="big-emoji">🎲</span>
+                <h2 style="color: var(--gray-700); margin-bottom: 0.5rem;">아직 추천 전이에요!</h2>
+                <p style="color: var(--gray-700);">아래 버튼을 눌러 오늘의 메뉴를 뽑아보세요</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 추천 버튼 -->
+    <section class="spin-section">
+        <button class="spin-btn" id="spinBtn" onclick="recommendFood()">
+            🎲 랜덤 추천받기!
+        </button>
+        <p style="margin-top: 1rem; color: var(--gray-700); font-size: 0.9rem;">클릭할수록 새로운 메뉴가 나와요</p>
+    </section>
+
+    <!-- 음식 목록 -->
+    <section class="food-list-section">
+        <h2>전체 메뉴 목록</h2>
+        <p class="food-list-subtitle">메뉴를 클릭하면 바로 그 메뉴로 결정할 수 있어요!</p>
+
+        <!-- 한식 -->
+        <div class="category-group" id="group-korean">
+            <div class="category-header">
+                <span style="font-size: 1.5rem;">🥢</span>
+                <h3 style="color: #e53e3e;">한식</h3>
+                <span class="category-count">25가지</span>
+            </div>
+            <div class="food-grid" id="grid-korean"></div>
+        </div>
+
+        <!-- 중식 -->
+        <div class="category-group" id="group-chinese">
+            <div class="category-header">
+                <span style="font-size: 1.5rem;">🥡</span>
+                <h3 style="color: #dd6b20;">중식</h3>
+                <span class="category-count">25가지</span>
+            </div>
+            <div class="food-grid" id="grid-chinese"></div>
+        </div>
+
+        <!-- 양식 -->
+        <div class="category-group" id="group-western">
+            <div class="category-header">
+                <span style="font-size: 1.5rem;">🍝</span>
+                <h3 style="color: #2b6cb0;">양식</h3>
+                <span class="category-count">25가지</span>
+            </div>
+            <div class="food-grid" id="grid-western"></div>
+        </div>
+
+        <!-- 패스트푸드 -->
+        <div class="category-group" id="group-fastfood">
+            <div class="category-header">
+                <span style="font-size: 1.5rem;">🍔</span>
+                <h3 style="color: #276749;">패스트푸드</h3>
+                <span class="category-count">25가지</span>
+            </div>
+            <div class="food-grid" id="grid-fastfood"></div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 어스컴퍼니(신윤재). 바이브코딩과 함께 성장하는 개발자.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // ==================== 음식 데이터베이스 ====================
+        const foods = {
+            korean: [
+                { name: "비빔밥", emoji: "🍚", desc: "각종 나물과 고추장이 어우러진 건강한 한끼" },
+                { name: "된장찌개", emoji: "🍲", desc: "구수하고 깊은 맛의 한국 대표 찌개" },
+                { name: "김치찌개", emoji: "🌶️", desc: "칼칼하고 시원한 국민 찌개" },
+                { name: "삼겹살", emoji: "🥓", desc: "불판에 구워먹는 최고의 고기" },
+                { name: "불고기", emoji: "🥩", desc: "달콤한 양념이 배인 부드러운 소고기" },
+                { name: "갈비탕", emoji: "🍖", desc: "뽀얀 국물의 진한 소갈비 탕" },
+                { name: "순두부찌개", emoji: "🫕", desc: "부드러운 순두부와 해물이 가득한 찌개" },
+                { name: "제육볶음", emoji: "🍖", desc: "매콤달콤 돼지고기 볶음" },
+                { name: "닭갈비", emoji: "🍗", desc: "춘천식 매콤한 닭갈비 볶음" },
+                { name: "삼계탕", emoji: "🐔", desc: "보양식의 대명사, 인삼 닭백숙" },
+                { name: "냉면", emoji: "🍜", desc: "여름에 더욱 맛있는 시원한 면 요리" },
+                { name: "잡채", emoji: "🥗", desc: "당면과 각종 채소의 조화" },
+                { name: "떡볶이", emoji: "🌶️", desc: "매콤달콤 쫄깃한 국민 간식" },
+                { name: "순대국밥", emoji: "🍲", desc: "진한 국물의 구수한 순대국밥" },
+                { name: "설렁탕", emoji: "🍜", desc: "뽀얀 국물의 사골 설렁탕" },
+                { name: "부대찌개", emoji: "🫕", desc: "햄과 소시지가 가득한 얼큰한 찌개" },
+                { name: "해물파전", emoji: "🥞", desc: "해산물이 들어간 바삭한 파전" },
+                { name: "보쌈", emoji: "🥬", desc: "수육과 신선한 채소의 조화" },
+                { name: "족발", emoji: "🐷", desc: "쫄깃하고 고소한 돼지 족발" },
+                { name: "콩나물국밥", emoji: "🍲", desc: "해장에 최고인 시원한 콩나물국밥" },
+                { name: "추어탕", emoji: "🐟", desc: "미꾸라지를 갈아 끓인 영양 보양식" },
+                { name: "감자탕", emoji: "🍲", desc: "돼지 등뼈와 감자의 얼큰한 탕" },
+                { name: "곰탕", emoji: "🍜", desc: "오랫동안 푹 끓인 진한 소뼈 탕" },
+                { name: "육개장", emoji: "🥩", desc: "대파와 고사리가 가득한 얼큰한 탕" },
+                { name: "갈비찜", emoji: "🍖", desc: "달콤한 양념에 조린 부드러운 갈비" }
+            ],
+            chinese: [
+                { name: "짜장면", emoji: "🍜", desc: "춘장 소스와 면이 어우러진 중화 국수" },
+                { name: "짬뽕", emoji: "🍜", desc: "해산물이 가득한 얼큰한 국물 면" },
+                { name: "탕수육", emoji: "🍖", desc: "바삭한 튀김에 달콤새콤 소스" },
+                { name: "볶음밥", emoji: "🍳", desc: "고소하게 볶은 중화식 볶음밥" },
+                { name: "마파두부", emoji: "🫕", desc: "얼얼한 마라 소스와 부드러운 두부" },
+                { name: "깐풍기", emoji: "🍗", desc: "바삭 튀긴 닭고기에 매콤달콤 소스" },
+                { name: "유린기", emoji: "🍗", desc: "부드러운 닭고기에 새콤한 소스" },
+                { name: "양장피", emoji: "🥗", desc: "당면과 해산물의 중화식 냉채" },
+                { name: "마라탕", emoji: "🌶️", desc: "얼얼하고 매운 마라 향신료 탕" },
+                { name: "훠궈", emoji: "🫕", desc: "다양한 재료를 직접 끓여먹는 중국 샤부샤부" },
+                { name: "딤섬", emoji: "🥟", desc: "찐 만두와 다양한 소를 채운 한입 음식" },
+                { name: "소룡포", emoji: "🥟", desc: "육즙이 가득한 상하이식 찐빵 만두" },
+                { name: "북경오리", emoji: "🦆", desc: "바삭한 껍질의 정통 중국식 오리구이" },
+                { name: "쿵파오치킨", emoji: "🍗", desc: "땅콩과 고추가 들어간 볶음 닭" },
+                { name: "팔보채", emoji: "🦐", desc: "해산물과 채소의 화려한 볶음" },
+                { name: "동파육", emoji: "🍖", desc: "간장에 오랫동안 조린 삼겹살 요리" },
+                { name: "중화냉면", emoji: "🍜", desc: "새콤달콤한 소스의 중화식 냉면" },
+                { name: "새우볶음", emoji: "🦐", desc: "탱글탱글 새우와 채소 볶음" },
+                { name: "오향장육", emoji: "🥩", desc: "다섯 가지 향신료로 조린 차가운 고기" },
+                { name: "잡탕밥", emoji: "🍚", desc: "각종 해산물과 채소를 얹은 볶음밥" },
+                { name: "군만두", emoji: "🥟", desc: "바삭하게 구운 맛있는 만두" },
+                { name: "라조기", emoji: "🍗", desc: "매콤한 고추 소스의 닭고기 볶음" },
+                { name: "해파리냉채", emoji: "🥗", desc: "쫄깃한 해파리와 채소의 냉채" },
+                { name: "중화덮밥", emoji: "🍚", desc: "걸쭉한 소스를 얹은 중화식 덮밥" },
+                { name: "팔각오리", emoji: "🦆", desc: "팔각 향신료로 구운 향긋한 오리고기" }
+            ],
+            western: [
+                { name: "스테이크", emoji: "🥩", desc: "육즙 가득한 소고기 스테이크" },
+                { name: "카르보나라", emoji: "🍝", desc: "크림 없이 달걀과 치즈로 만드는 정통 파스타" },
+                { name: "피자", emoji: "🍕", desc: "바삭한 도우와 풍성한 토핑의 이탈리안 피자" },
+                { name: "리소토", emoji: "🍚", desc: "크리미하게 조린 이탈리안 쌀 요리" },
+                { name: "오일파스타", emoji: "🍝", desc: "올리브 오일과 마늘의 심플한 파스타" },
+                { name: "크림파스타", emoji: "🍝", desc: "진한 크림 소스의 부드러운 파스타" },
+                { name: "뇨끼", emoji: "🥔", desc: "감자 반죽으로 만든 쫄깃한 이탈리안 덤플링" },
+                { name: "라자냐", emoji: "🫕", desc: "층층이 쌓인 파스타와 고기 소스의 오븐 요리" },
+                { name: "그라탱", emoji: "🧀", desc: "치즈를 듬뿍 얹어 구운 크리미한 오븐 요리" },
+                { name: "프렌치어니언수프", emoji: "🧅", desc: "양파를 천천히 카라멜화한 깊은 맛의 수프" },
+                { name: "시저샐러드", emoji: "🥗", desc: "시저 드레싱과 크루통의 클래식 샐러드" },
+                { name: "연어 스테이크", emoji: "🐟", desc: "촉촉하게 구운 연어 필렛" },
+                { name: "치킨 알프레도", emoji: "🍗", desc: "크림 소스와 닭고기의 풍성한 파스타" },
+                { name: "클램차우더", emoji: "🦪", desc: "조개가 가득한 크리미한 수프" },
+                { name: "에그 베네딕트", emoji: "🥚", desc: "잉글리시 머핀 위의 수란과 홀랜다이즈 소스" },
+                { name: "필레 미뇽", emoji: "🥩", desc: "가장 부드러운 안심 스테이크" },
+                { name: "해산물 파에야", emoji: "🦐", desc: "스페인식 해산물 볶음밥" },
+                { name: "비프 웰링턴", emoji: "🥩", desc: "페이스트리로 감싼 영국식 소고기 요리" },
+                { name: "닭 코르동 블루", emoji: "🍗", desc: "햄과 치즈를 넣은 닭가슴살 롤" },
+                { name: "포르치니 리소토", emoji: "🍄", desc: "향기로운 포르치니 버섯의 리소토" },
+                { name: "그릭 샐러드", emoji: "🥗", desc: "페타 치즈와 올리브가 가득한 지중해 샐러드" },
+                { name: "쉬림프 스캠피", emoji: "🦐", desc: "마늘 버터 소스의 새우 파스타" },
+                { name: "무사카", emoji: "🍆", desc: "가지와 고기 소스를 층층이 쌓은 그리스 요리" },
+                { name: "라타투이", emoji: "🫕", desc: "채소를 오래 익힌 프로방스 스타일 스튜" },
+                { name: "오믈렛", emoji: "🍳", desc: "폭신하고 부드러운 프렌치 스타일 달걀 요리" }
+            ],
+            fastfood: [
+                { name: "빅맥", emoji: "🍔", desc: "맥도날드의 시그니처 더블 패티 버거" },
+                { name: "와퍼", emoji: "🍔", desc: "버거킹의 화염 직화 버거" },
+                { name: "치킨버거", emoji: "🍗", desc: "바삭한 닭고기 패티의 버거" },
+                { name: "치즈버거", emoji: "🧀", desc: "녹진한 치즈가 가득한 클래식 버거" },
+                { name: "불고기버거", emoji: "🍔", desc: "한국식 불고기 소스 패티의 버거" },
+                { name: "새우버거", emoji: "🦐", desc: "통통한 새우 패티의 버거" },
+                { name: "치킨텐더", emoji: "🍗", desc: "바삭하게 튀긴 닭가슴살 스트립" },
+                { name: "핫도그", emoji: "🌭", desc: "소시지와 빵의 심플하고 맛있는 조합" },
+                { name: "감자튀김", emoji: "🍟", desc: "바삭하고 짭짤한 황금빛 프렌치프라이" },
+                { name: "어니언링", emoji: "🧅", desc: "바삭하게 튀긴 양파 튀김" },
+                { name: "KFC 치킨", emoji: "🍗", desc: "11가지 허브와 스파이스의 오리지널 치킨" },
+                { name: "서브웨이 샌드위치", emoji: "🥖", desc: "내가 직접 만드는 신선한 샌드위치" },
+                { name: "타코", emoji: "🌮", desc: "고기와 채소가 가득한 멕시코 음식" },
+                { name: "부리또", emoji: "🌯", desc: "큼직한 토르티야에 싸인 멕시코 음식" },
+                { name: "나초", emoji: "🧀", desc: "치즈 소스를 뿌린 바삭한 옥수수 칩" },
+                { name: "케밥", emoji: "🥙", desc: "구운 고기와 채소의 중동식 샌드위치" },
+                { name: "핫윙", emoji: "🍗", desc: "매콤한 소스의 바삭한 닭날개" },
+                { name: "치킨맥너겟", emoji: "🍗", desc: "한입에 쏙 들어가는 미니 닭튀김" },
+                { name: "롯데리아 새우버거", emoji: "🦐", desc: "한국식 새우 패티 버거" },
+                { name: "웨지 감자", emoji: "🥔", desc: "굵게 썰어 구운 웨지 포테이토" },
+                { name: "치즈스틱", emoji: "🧀", desc: "쭉 늘어나는 치즈가 가득한 튀김" },
+                { name: "모짜렐라 스틱", emoji: "🧀", desc: "바삭한 겉에 쫀득한 모짜렐라 치즈" },
+                { name: "피시 앤 칩스", emoji: "🐟", desc: "바삭하게 튀긴 생선과 감자튀김" },
+                { name: "핫 치킨 샌드위치", emoji: "🌶️", desc: "매콤하고 바삭한 핫 치킨 샌드위치" },
+                { name: "쉐이크쉑 버거", emoji: "🍔", desc: "프리미엄 앵거스 비프 패티 버거" }
+            ]
+        };
+
+        // ==================== 상태 ====================
+        let currentCategory = 'all';
+        let lastPicked = null;
+
+        // ==================== 음식 목록 렌더링 ====================
+        function renderFoodLists() {
+            Object.keys(foods).forEach(cat => {
+                const grid = document.getElementById('grid-' + cat);
+                grid.innerHTML = '';
+                foods[cat].forEach(food => {
+                    const item = document.createElement('div');
+                    item.className = 'food-item';
+                    item.id = 'food-' + cat + '-' + food.name;
+                    item.textContent = food.emoji + ' ' + food.name;
+                    item.onclick = () => selectFood(food, cat);
+                    grid.appendChild(item);
+                });
+            });
+        }
+
+        // ==================== 카테고리 선택 ====================
+        function setCategory(cat, btn) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        // ==================== 랜덤 추천 ====================
+        function recommendFood() {
+            const btn = document.getElementById('spinBtn');
+            btn.disabled = true;
+            btn.textContent = '🎲 뽑는 중...';
+
+            // 대상 음식 리스트 선택
+            let pool = [];
+            if (currentCategory === 'all') {
+                Object.keys(foods).forEach(cat => {
+                    foods[cat].forEach(food => pool.push({ ...food, cat }));
+                });
+            } else {
+                foods[currentCategory].forEach(food => pool.push({ ...food, cat: currentCategory }));
+            }
+
+            // 직전 선택 제외 (2개 이상일 때)
+            let filtered = pool.filter(f => !lastPicked || f.name !== lastPicked.name);
+            if (filtered.length === 0) filtered = pool;
+
+            // 랜덤 선택 (짧은 애니메이션 후)
+            setTimeout(() => {
+                const picked = filtered[Math.floor(Math.random() * filtered.length)];
+                lastPicked = picked;
+                showResult(picked);
+                highlightFood(picked);
+
+                btn.disabled = false;
+                btn.textContent = '🎲 다시 뽑기!';
+            }, 400);
+        }
+
+        // ==================== 결과 표시 ====================
+        function showResult(food) {
+            const card = document.getElementById('resultCard');
+            const catLabels = {
+                korean: '🥢 한식',
+                chinese: '🥡 중식',
+                western: '🍝 양식',
+                fastfood: '🍔 패스트푸드'
+            };
+
+            card.innerHTML = `
+                <span class="result-emoji">${food.emoji}</span>
+                <span class="result-category cat-${food.cat}">${catLabels[food.cat]}</span>
+                <div class="result-name">${food.name}</div>
+                <div class="result-desc">${food.desc}</div>
+                <button class="spin-btn" onclick="recommendFood()" style="font-size: 1rem; padding: 0.8rem 2rem;">
+                    🎲 다시 뽑기
+                </button>
+            `;
+
+            card.classList.remove('spinning');
+            void card.offsetWidth; // reflow
+            card.classList.add('spinning');
+        }
+
+        // ==================== 직접 선택 ====================
+        function selectFood(food, cat) {
+            lastPicked = { ...food, cat };
+            showResult({ ...food, cat });
+            highlightFood({ ...food, cat });
+            // 결과 카드로 부드럽게 스크롤
+            document.querySelector('.result-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // ==================== 하이라이트 ====================
+        function highlightFood(food) {
+            // 이전 하이라이트 제거
+            document.querySelectorAll('.food-item.highlighted').forEach(el => {
+                el.classList.remove('highlighted');
+            });
+            // 새 하이라이트
+            const el = document.getElementById('food-' + food.cat + '-' + food.name);
+            if (el) {
+                el.classList.add('highlighted');
+                el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // ==================== 초기화 ====================
+        renderFoodLists();
+    </script>
+</body>
+</html>

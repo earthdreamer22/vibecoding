@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대구 근교 글램핑 캠핑장 - 어스컴퍼니</title>
+    <meta name="description" content="대구 근교 아이와 함께 가기 좋은 글램핑 & 캠핑장 20곳 추천">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛺</text></svg>">
+    <style>
+        .camping-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .camping-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .camping-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        .camp-header {
+            background: linear-gradient(135deg, #4a90e2 0%, #63b3ed 100%);
+            color: white;
+            padding: 1.5rem;
+        }
+        .camp-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .camp-location {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .camp-body {
+            padding: 1.5rem;
+        }
+        .camp-features {
+            margin-bottom: 1rem;
+        }
+        .camp-feature {
+            display: inline-block;
+            background: #e6f2ff;
+            color: #2c5282;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin: 0.2rem;
+        }
+        .camp-description {
+            color: #4a5568;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+        .camp-price {
+            font-size: 1.2rem;
+            color: #2c5282;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        .reserve-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #4a90e2 0%, #63b3ed 100%);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: opacity 0.3s ease;
+        }
+        .reserve-btn:hover {
+            opacity: 0.9;
+        }
+        .filter-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f7fafc;
+            border-radius: 12px;
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid #4a90e2;
+            background: white;
+            color: #4a90e2;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #4a90e2;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- 네비게이션 -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">어스컴퍼니</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="food.html">밥뭐먹지?</a></li>
+                <li><a href="movieTMDB.html">Movies</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="camping.html">Camping</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 -->
+    <main>
+        <!-- 히어로 섹션 -->
+        <section class="hero" style="background: linear-gradient(135deg, #4a90e2 0%, #63b3ed 100%);">
+            <div class="hero-content">
+                <h1 style="color: white;">⛺ 대구 근교 글램핑 & 캠핑장</h1>
+                <p style="color: white; opacity: 0.95;">아이와 함께 떠나는 자연 속 힐링 여행</p>
+                <p class="subtitle" style="color: white; opacity: 0.9;">엄선된 20곳의 가족 친화 캠핑장</p>
+            </div>
+        </section>
+
+        <!-- 필터 섹션 -->
+        <section class="section">
+            <div class="container">
+                <div class="filter-section">
+                    <h3 style="margin-bottom: 1rem;">지역별 필터</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" onclick="filterCamps('all')">전체</button>
+                        <button class="filter-btn" onclick="filterCamps('대구')">대구</button>
+                        <button class="filter-btn" onclick="filterCamps('영천')">영천</button>
+                        <button class="filter-btn" onclick="filterCamps('경산')">경산</button>
+                        <button class="filter-btn" onclick="filterCamps('달성')">달성</button>
+                        <button class="filter-btn" onclick="filterCamps('칠곡')">칠곡</button>
+                        <button class="filter-btn" onclick="filterCamps('경주')">경주</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 캠핑장 목록 -->
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <div class="camping-grid">
+                    <!-- 1. 팔공산글램핑 -->
+                    <div class="camping-card" data-region="칠곡">
+                        <div class="camp-header">
+                            <div class="camp-title">팔공산글램핑</div>
+                            <div class="camp-location">📍 경북 칠곡 팔공산</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🏕️ 글램핑</span>
+                                <span class="camp-feature">🎪 캠프닉</span>
+                                <span class="camp-feature">🌲 자연힐링</span>
+                            </div>
+                            <div class="camp-description">
+                                대구·구미 근교에서 당일 글램핑과 캠프닉을 즐기며 자연 속 힐링을 경험할 수 있는 곳
+                            </div>
+                            <div class="camp-price">예약 문의</div>
+                            <a href="https://www.xn--ob0bvty5ugmjs8wm8c.com/" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 2. 아우노 펠리스 글램핑 -->
+                    <div class="camping-card" data-region="영천">
+                        <div class="camp-header">
+                            <div class="camp-title">아우노 펠리스 글램핑</div>
+                            <div class="camp-location">📍 경북 영천시 상신기길 150</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🏊 수영장</span>
+                                <span class="camp-feature">❄️ 난방</span>
+                                <span class="camp-feature">☕ 카페</span>
+                            </div>
+                            <div class="camp-description">
+                                성인/유아 풀, 편의점, 카페 등 생활 편의 시설 완비. 바닥 난방과 에어컨으로 사계절 이용 가능
+                            </div>
+                            <div class="camp-price">시즌별 상이</div>
+                            <a href="https://www.yeogi.com/accommodation/camping/kr/%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 3. 라운드힐 905 -->
+                    <div class="camping-card" data-region="달성">
+                        <div class="camp-header">
+                            <div class="camp-title">라운드힐 905</div>
+                            <div class="camp-location">📍 대구 달성군 가창면 주리2길 42</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🚐 카라반</span>
+                                <span class="camp-feature">💰 연박할인</span>
+                                <span class="camp-feature">🌄 전망</span>
+                            </div>
+                            <div class="camp-description">
+                                카라반 연박 이용 시 2만원 할인. 아름다운 산세와 함께하는 힐링 캠핑
+                            </div>
+                            <div class="camp-price">연박 할인</div>
+                            <a href="https://www.yeogi.com/accommodation/camping/kr/%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 4. 달서별빛캠프 -->
+                    <div class="camping-card" data-region="대구">
+                        <div class="camp-header">
+                            <div class="camp-title">달서별빛캠프 캠핑장</div>
+                            <div class="camp-location">📍 대구 달서구</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🏛️ 공공시설</span>
+                                <span class="camp-feature">✨ 깨끗한시설</span>
+                                <span class="camp-feature">🚗 접근성</span>
+                            </div>
+                            <div class="camp-description">
+                                대구시에서 관리하는 깨끗한 캠핑장. 도심에 위치하여 이동 부담 없음
+                            </div>
+                            <div class="camp-price">예약 문의</div>
+                            <a href="https://yeyak.daegu.go.kr/yeyak/camp/campListView.do" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 5. 가창농원 오토 글램핑 -->
+                    <div class="camping-card" data-region="대구">
+                        <div class="camp-header">
+                            <div class="camp-title">가창농원 오토 글램핑</div>
+                            <div class="camp-location">📍 대구 달성군 가창면</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🍖 BBQ</span>
+                                <span class="camp-feature">♨️ 찜질방</span>
+                                <span class="camp-feature">🌲 숲속</span>
+                            </div>
+                            <div class="camp-description">
+                                숲 속 캠핑장. 참숯 가마 찜질방과 8가지 메뉴 식당 운영
+                            </div>
+                            <div class="camp-price">130,000원~</div>
+                            <a href="https://www.campingtalk.me/booking/camp/2660" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 6. 힐링파크 포니목장 -->
+                    <div class="camping-card" data-region="달성">
+                        <div class="camp-header">
+                            <div class="camp-title">힐링파크 포니목장</div>
+                            <div class="camp-location">📍 대구 달성군 가창면 주리</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🐴 승마</span>
+                                <span class="camp-feature">🏊 수영장</span>
+                                <span class="camp-feature">⚡ 전기</span>
+                            </div>
+                            <div class="camp-description">
+                                84개 파쇄석 사이트. 전기, 온수, 취사장, 수영장 등 편의시설 완비
+                            </div>
+                            <div class="camp-price">사이트별 상이</div>
+                            <a href="https://www.yeogi.com/accommodation/camping/kr/%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 7. 비슬산 자연휴양림 -->
+                    <div class="camping-card" data-region="달성">
+                        <div class="camp-header">
+                            <div class="camp-title">비슬산 자연휴양림</div>
+                            <div class="camp-location">📍 대구 달성군 유가면 양리</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🏞️ 자연휴양림</span>
+                                <span class="camp-feature">🏊 수영장</span>
+                                <span class="camp-feature">🏪 매점</span>
+                            </div>
+                            <div class="camp-description">
+                                55개 사이트. 화장실, 샤워실, 취사장, 매점, 수영장 등 완비
+                            </div>
+                            <div class="camp-price">예약 문의</div>
+                            <a href="https://www.gocamping.or.kr" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 8. 영천 채송화 글램핑 -->
+                    <div class="camping-card" data-region="영천">
+                        <div class="camp-header">
+                            <div class="camp-title">영천 채송화 글램핑</div>
+                            <div class="camp-location">📍 경북 영천시</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">⭐ 별자리관측</span>
+                                <span class="camp-feature">🎯 프라이빗</span>
+                                <span class="camp-feature">✨ 깨끗함</span>
+                            </div>
+                            <div class="camp-description">
+                                방해받지 않는 휴식 공간. 맑은 하늘에서 별자리 감상 가능
+                            </div>
+                            <div class="camp-price">예약 문의</div>
+                            <a href="https://www.yeogi.com/accommodation/camping/kr/%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 9. 영천 늘푸른체험학교 글램핑 -->
+                    <div class="camping-card" data-region="영천">
+                        <div class="camp-header">
+                            <div class="camp-title">영천 늘푸른체험학교 글램핑</div>
+                            <div class="camp-location">📍 경북 영천시</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">👨‍👩‍👧‍👦 가족체험</span>
+                                <span class="camp-feature">🎓 교육</span>
+                                <span class="camp-feature">🏕️ 글램핑</span>
+                            </div>
+                            <div class="camp-description">
+                                체험학교와 함께하는 글램핑. 아이들 교육 프로그램 병행 가능
+                            </div>
+                            <div class="camp-price">130,000원~</div>
+                            <a href="https://tourvis.com/hotel/hotels/703008" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 10. 경산 모골캠핑장 -->
+                    <div class="camping-card" data-region="경산">
+                        <div class="camp-header">
+                            <div class="camp-title">경산 모골캠핑장</div>
+                            <div class="camp-location">📍 경북 경산시 남천면</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🚗 오토캠핑</span>
+                                <span class="camp-feature">💦 물놀이장</span>
+                                <span class="camp-feature">🤸 트램펄린</span>
+                            </div>
+                            <div class="camp-description">
+                                22면 오토캠핑 사이트. 물놀이장, 트램펄린 등 아이들 놀이시설 완비
+                            </div>
+                            <div class="camp-price">사이트별 상이</div>
+                            <a href="https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101039" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 11. 산으로간캠프 -->
+                    <div class="camping-card" data-region="경산">
+                        <div class="camp-header">
+                            <div class="camp-title">산으로간캠프</div>
+                            <div class="camp-location">📍 경북 경산시</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🏔️ 산속</span>
+                                <span class="camp-feature">👶 아이동반</span>
+                                <span class="camp-feature">🌳 자연</span>
+                            </div>
+                            <div class="camp-description">
+                                아이와 함께 가기 좋은 산속 캠핑장. 자연 친화적 환경
+                            </div>
+                            <div class="camp-price">예약 문의</div>
+                            <a href="https://mom-mom.net/travel/places/66037b7cd9508774dbc2c2c4" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 12. 별빛마루 글램핑 -->
+                    <div class="camping-card" data-region="경주">
+                        <div class="camp-header">
+                            <div class="camp-title">별빛마루 글램핑</div>
+                            <div class="camp-location">📍 경북 경주시</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">⛺ 오토캠핑</span>
+                                <span class="camp-feature">🏛️ 관광지인근</span>
+                                <span class="camp-feature">⭐ 별자리</span>
+                            </div>
+                            <div class="camp-description">
+                                경주 문화관광지 인근. 별빛 아래 낭만적인 캠핑
+                            </div>
+                            <div class="camp-price">예약 문의</div>
+                            <a href="https://www.gyeongju.go.kr/tour/page.do?mnu_uid=2339&con_uid=560&cmd=2" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 13. 글램핑 포엠 -->
+                    <div class="camping-card" data-region="대구">
+                        <div class="camp-header">
+                            <div class="camp-title">글램핑 포엠</div>
+                            <div class="camp-location">📍 대구 근교</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">💝 로맨틱</span>
+                                <span class="camp-feature">🎨 감성</span>
+                                <span class="camp-feature">📸 포토존</span>
+                            </div>
+                            <div class="camp-description">
+                                감성적인 분위기의 글램핑장. 포토존과 낭만적인 공간 구성
+                            </div>
+                            <div class="camp-price">예약 문의</div>
+                            <a href="https://c.jung0327.com/entry/%EB%8C%80%EA%B5%AC-%EA%B7%BC%EA%B5%90-%EA%B8%80%EB%9E%A8%ED%95%91%EC%9E%A5-%EC%BA%A0%ED%95%91%EC%9E%A5-%EC%B6%94%EC%B2%9C-LIST" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 14. 봉식이놀이터 캠핑장 -->
+                    <div class="camping-card" data-region="대구">
+                        <div class="camp-header">
+                            <div class="camp-title">봉식이놀이터 캠핑장</div>
+                            <div class="camp-location">📍 대구 근교</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🎪 놀이시설</span>
+                                <span class="camp-feature">👦 어린이</span>
+                                <span class="camp-feature">🏃 체험활동</span>
+                            </div>
+                            <div class="camp-description">
+                                어린이 놀이시설이 풍부한 캠핑장. 아이들이 즐기기 좋은 환경
+                            </div>
+                            <div class="camp-price">예약 문의</div>
+                            <a href="https://c.jung0327.com/entry/%EB%8C%80%EA%B5%AC-%EA%B7%BC%EA%B5%90-%EA%B8%80%EB%9E%A8%ED%95%91%EC%9E%A5-%EC%BA%A0%ED%95%91%EC%9E%A5-%EC%B6%94%EC%B2%9C-LIST" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 15. 일랑일랑 캠핑 -->
+                    <div class="camping-card" data-region="대구">
+                        <div class="camp-header">
+                            <div class="camp-title">일랑일랑 캠핑</div>
+                            <div class="camp-location">📍 대구 근교</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🌺 힐링</span>
+                                <span class="camp-feature">🌿 조용함</span>
+                                <span class="camp-feature">🛏️ 편안함</span>
+                            </div>
+                            <div class="camp-description">
+                                조용하고 편안한 분위기. 힐링에 최적화된 캠핑 환경
+                            </div>
+                            <div class="camp-price">예약 문의</div>
+                            <a href="https://c.jung0327.com/entry/%EB%8C%80%EA%B5%AC-%EA%B7%BC%EA%B5%90-%EC%BA%A0%ED%95%91%EC%9E%A5-%EC%B6%94%EC%B2%9C-LIST" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 16. 동산 오토캠핑 -->
+                    <div class="camping-card" data-region="대구">
+                        <div class="camp-header">
+                            <div class="camp-title">동산 오토캠핑</div>
+                            <div class="camp-location">📍 대구 근교</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🚙 오토</span>
+                                <span class="camp-feature">⚡ 전기</span>
+                                <span class="camp-feature">🚿 샤워장</span>
+                            </div>
+                            <div class="camp-description">
+                                편리한 오토캠핑장. 전기, 샤워 시설 완비
+                            </div>
+                            <div class="camp-price">예약 문의</div>
+                            <a href="https://c.jung0327.com/entry/%EB%8C%80%EA%B5%AC-%EA%B7%BC%EA%B5%90-%EC%BA%A0%ED%95%91%EC%9E%A5-%EC%B6%94%EC%B2%9C-LIST" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 17. 진밭골 캠핑장 -->
+                    <div class="camping-card" data-region="대구">
+                        <div class="camp-header">
+                            <div class="camp-title">진밭골 캠핑장</div>
+                            <div class="camp-location">📍 대구 근교</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🏞️ 계곡</span>
+                                <span class="camp-feature">💧 물놀이</span>
+                                <span class="camp-feature">🎣 낚시</span>
+                            </div>
+                            <div class="camp-description">
+                                계곡 옆 캠핑장. 물놀이와 낚시 가능
+                            </div>
+                            <div class="camp-price">예약 문의</div>
+                            <a href="https://c.jung0327.com/entry/%EB%8C%80%EA%B5%AC-%EA%B7%BC%EA%B5%90-%EC%BA%A0%ED%95%91%EC%9E%A5-%EC%B6%94%EC%B2%9C-LIST" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 18. 논논캠프 -->
+                    <div class="camping-card" data-region="대구">
+                        <div class="camp-header">
+                            <div class="camp-title">논논캠프</div>
+                            <div class="camp-location">📍 대구 근교</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🌾 전원</span>
+                                <span class="camp-feature">🦋 생태</span>
+                                <span class="camp-feature">👨‍🌾 농촌체험</span>
+                            </div>
+                            <div class="camp-description">
+                                전원 속 캠핑장. 농촌 생태 체험 가능
+                            </div>
+                            <div class="camp-price">예약 문의</div>
+                            <a href="https://c.jung0327.com/entry/%EB%8C%80%EA%B5%AC-%EA%B7%BC%EA%B5%90-%EC%BA%A0%ED%95%91%EC%9E%A5-%EC%B6%94%EC%B2%9C-LIST" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 19. 청도 글램핑 -->
+                    <div class="camping-card" data-region="경북">
+                        <div class="camp-header">
+                            <div class="camp-title">청도 글램핑</div>
+                            <div class="camp-location">📍 경북 청도군</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">🍑 특산물</span>
+                                <span class="camp-feature">🎪 글램핑</span>
+                                <span class="camp-feature">🏞️ 관광</span>
+                            </div>
+                            <div class="camp-description">
+                                청도 관광과 함께하는 글램핑. 지역 특산물 체험 가능
+                            </div>
+                            <div class="camp-price">예약 문의</div>
+                            <a href="https://www.yeogi.com/accommodation/camping/kr/%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84/%EC%B2%AD%EB%8F%84%EA%B5%B0" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+
+                    <!-- 20. 캠핏 경북 캠핑장 -->
+                    <div class="camping-card" data-region="경북">
+                        <div class="camp-header">
+                            <div class="camp-title">캠핏 경북 캠핑장</div>
+                            <div class="camp-location">📍 경북 일대</div>
+                        </div>
+                        <div class="camp-body">
+                            <div class="camp-features">
+                                <span class="camp-feature">📱 실시간예약</span>
+                                <span class="camp-feature">💳 간편결제</span>
+                                <span class="camp-feature">⭐ 리뷰</span>
+                            </div>
+                            <div class="camp-description">
+                                캠핏 플랫폼의 경북 지역 캠핑장. 실시간 예약 및 리뷰 확인 가능
+                            </div>
+                            <div class="camp-price">사이트별 상이</div>
+                            <a href="https://camfit.co.kr/camp/652cc48fc55ccb001ed0c883" target="_blank" class="reserve-btn">예약하기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 예약 안내 -->
+        <section class="section" style="background-color: #f7fafc;">
+            <div class="container">
+                <h2 class="section-title">예약 전 확인사항</h2>
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3 style="color: var(--deep-blue); margin-bottom: 1rem;">📅 예약 팁</h3>
+                        <ul style="line-height: 2;">
+                            <li>주말과 성수기는 최소 2주 전 예약 권장</li>
+                            <li>취소 규정 반드시 확인</li>
+                            <li>날씨 확인 후 예약하기</li>
+                            <li>연박 할인 혜택 확인</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: var(--deep-blue); margin-bottom: 1rem;">🎒 준비물</h3>
+                        <ul style="line-height: 2;">
+                            <li>개인 침낭 및 매트 (일부 제공)</li>
+                            <li>모기약, 선크림 등 방충용품</li>
+                            <li>간편식, 음료수</li>
+                            <li>아이 놀이용품 및 간식</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 어스컴퍼니(신윤재). 바이브코딩과 함께 성장하는 개발자.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">캠핑장 정보는 수시로 변경될 수 있으니 예약 전 반드시 확인하세요.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        function filterCamps(region) {
+            const cards = document.querySelectorAll('.camping-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (region === 'all' || card.dataset.region === region || card.dataset.region.includes(region)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
