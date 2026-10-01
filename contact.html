@@ -7,6 +7,92 @@
     <meta name="description" content="어스컴퍼니 프리미엄 반려동물 케어 멤버십 상담 문의.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e3a8a'/><text x='50' y='68' font-size='56' font-family='Inter,sans-serif' font-weight='700' fill='white' text-anchor='middle'>E</text></svg>">
+    <style>
+        .inquiry-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .inquiry-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gray-900);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .inquiry-form label .req {
+            color: #dc2626;
+            margin-left: 0.25rem;
+        }
+        .inquiry-form .field-desc {
+            display: block;
+            color: var(--gray-700);
+            font-size: 0.85rem;
+            font-weight: 400;
+            margin-top: 0.25rem;
+        }
+        .inquiry-form input[type="text"],
+        .inquiry-form input[type="email"],
+        .inquiry-form select,
+        .inquiry-form textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--gray-900);
+            background: var(--white);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .inquiry-form input:focus,
+        .inquiry-form select:focus,
+        .inquiry-form textarea:focus {
+            outline: none;
+            border-color: var(--deep-blue);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.12);
+        }
+        .inquiry-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .inquiry-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .inquiry-form .radio-group {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            padding-top: 0.25rem;
+        }
+        .inquiry-form .radio-group label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 400;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+        .inquiry-form .radio-group input {
+            accent-color: var(--deep-blue);
+            margin: 0;
+        }
+        .inquiry-form .submit-row {
+            margin-top: 2rem;
+        }
+        .inquiry-form .submit-row .btn {
+            width: 100%;
+            padding: 0.9rem;
+            font-size: 1.05rem;
+            cursor: pointer;
+            border: none;
+        }
+        @media (max-width: 640px) {
+            .inquiry-form .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -37,45 +123,116 @@
 
         <section class="section">
             <div class="container">
-                <div class="contact-info" style="max-width: 720px; margin: 0 auto;">
-                    <h2 style="color: var(--deep-blue); margin-bottom: 1.5rem; text-align: center;">상담 문의</h2>
+                <div style="max-width: 720px; margin: 0 auto;">
+                    <h2 style="color: var(--deep-blue); margin-bottom: 1rem; text-align: center;">상담 문의</h2>
                     <p style="text-align: center; color: var(--gray-700); margin-bottom: 2.5rem;">
-                        아래 이메일로 반려동물 정보와 함께 문의해 주시면<br>
-                        대표 수의사가 직접 회신드립니다.
+                        아래 양식을 작성해 주시면 대표 수의사가 직접 확인하고 회신드립니다.<br>
+                        <small>작성 후 전송 버튼을 누르면 메일 앱이 열립니다.</small>
                     </p>
 
-                    <div class="card" style="margin-bottom: 1.5rem;">
-                        <h3 style="color: var(--deep-blue); margin-bottom: 1rem;">문의 이메일</h3>
-                        <p style="margin-bottom: 0.5rem;">
-                            <a href="mailto:yoonjae790510@gmail.com?subject=[어스컴퍼니] 멤버십 상담 문의" onclick="copyEmail()" style="color: var(--deep-blue); font-size: 1.15rem; font-weight: 600;">yoonjae790510@gmail.com</a>
-                        </p>
-                        <small style="color: var(--gray-700);">클릭하면 메일 작성 창이 열립니다.</small>
-                    </div>
+                    <form class="card inquiry-form" id="inquiry-form" onsubmit="return submitInquiry(event)">
+                        <div class="form-group">
+                            <label for="guardian_name">보호자 성함<span class="req">*</span></label>
+                            <input type="text" id="guardian_name" name="guardian_name" required>
+                        </div>
 
-                    <div class="card" style="margin-bottom: 1.5rem;">
-                        <h3 style="color: var(--deep-blue); margin-bottom: 1rem;">문의 시 아래 정보를 함께 보내주시면 좋습니다</h3>
-                        <ul style="list-style: none; padding: 0;">
-                            <li style="margin-bottom: 0.6rem; padding-left: 1rem; position: relative; border-left: 2px solid var(--gray-200);">
-                                <span style="padding-left: 0.5rem;">반려동물 이름 / 종(강아지·고양이) / 품종</span>
-                            </li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1rem; position: relative; border-left: 2px solid var(--gray-200);">
-                                <span style="padding-left: 0.5rem;">나이, 체중, 성별, 중성화 여부</span>
-                            </li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1rem; position: relative; border-left: 2px solid var(--gray-200);">
-                                <span style="padding-left: 0.5rem;">주요 건강 이슈 또는 특이사항</span>
-                            </li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1rem; position: relative; border-left: 2px solid var(--gray-200);">
-                                <span style="padding-left: 0.5rem;">거주 지역</span>
-                            </li>
-                            <li style="margin-bottom: 0; padding-left: 1rem; position: relative; border-left: 2px solid var(--gray-200);">
-                                <span style="padding-left: 0.5rem;">궁금하신 점 또는 지금 가장 고민되는 부분</span>
-                            </li>
-                        </ul>
-                    </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact_phone">연락처</label>
+                                <input type="text" id="contact_phone" name="contact_phone" placeholder="010-0000-0000">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact_email">회신 이메일<span class="req">*</span></label>
+                                <input type="email" id="contact_email" name="contact_email" required>
+                            </div>
+                        </div>
 
-                    <div style="background: linear-gradient(135deg, var(--deep-blue) 0%, var(--light-blue) 100%); color: white; padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center;">
+                        <div class="form-group">
+                            <label for="region">거주 지역<span class="req">*</span>
+                                <span class="field-desc">예) 대구 수성구, 경북 경산시</span>
+                            </label>
+                            <input type="text" id="region" name="region" required>
+                        </div>
+
+                        <hr style="border: none; border-top: 1px solid var(--gray-200); margin: 2rem 0;">
+
+                        <h3 style="color: var(--deep-blue); margin-bottom: 1.25rem; font-size: 1.05rem;">반려동물 정보</h3>
+
+                        <div class="form-group">
+                            <label for="pet_name">이름<span class="req">*</span></label>
+                            <input type="text" id="pet_name" name="pet_name" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pet_species">종<span class="req">*</span></label>
+                                <select id="pet_species" name="pet_species" required>
+                                    <option value="">선택</option>
+                                    <option value="강아지">강아지</option>
+                                    <option value="고양이">고양이</option>
+                                    <option value="기타">기타</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="pet_breed">품종</label>
+                                <input type="text" id="pet_breed" name="pet_breed" placeholder="예) 말티즈, 코리안숏헤어">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pet_age">나이</label>
+                                <input type="text" id="pet_age" name="pet_age" placeholder="예) 3년 6개월">
+                            </div>
+                            <div class="form-group">
+                                <label for="pet_weight">체중</label>
+                                <input type="text" id="pet_weight" name="pet_weight" placeholder="예) 4.2kg">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>성별</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="pet_sex" value="수컷"> 수컷</label>
+                                    <label><input type="radio" name="pet_sex" value="암컷"> 암컷</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>중성화 여부</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="pet_neutered" value="O"> 완료</label>
+                                    <label><input type="radio" name="pet_neutered" value="X"> 미완료</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pet_health">주요 건강 이슈 또는 특이사항
+                                <span class="field-desc">진단받은 질환, 복용 중인 약, 알레르기, 과거 수술 이력 등</span>
+                            </label>
+                            <textarea id="pet_health" name="pet_health"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inquiry">문의 내용<span class="req">*</span>
+                                <span class="field-desc">궁금한 점이나 지금 가장 고민되는 부분을 편하게 적어주세요.</span>
+                            </label>
+                            <textarea id="inquiry" name="inquiry" required></textarea>
+                        </div>
+
+                        <div class="submit-row">
+                            <button type="submit" class="btn">메일로 보내기</button>
+                            <p style="text-align: center; color: var(--gray-700); font-size: 0.85rem; margin-top: 0.75rem;">
+                                전송 버튼을 누르면 작성한 내용이 자동으로 정리되어 메일 앱이 열립니다.
+                            </p>
+                        </div>
+                    </form>
+
+                    <div style="background: linear-gradient(135deg, var(--deep-blue) 0%, var(--light-blue) 100%); color: white; padding: 2rem; border-radius: 12px; margin-top: 2.5rem; text-align: center;">
                         <h3 style="margin-bottom: 1rem;">3영업일 이내 회신</h3>
-                        <p style="opacity: 0.95;">문의 주신 내용은 대표 수의사가 직접 확인하고 3영업일 이내 회신드리는 것을 원칙으로 합니다.</p>
+                        <p style="opacity: 0.95; margin-bottom: 1rem;">문의 주신 내용은 대표 수의사가 직접 확인하고 3영업일 이내 회신드리는 것을 원칙으로 합니다.</p>
+                        <p style="opacity: 0.9; font-size: 0.95rem;">양식 작성이 어려우시다면 <a href="mailto:yoonjae790510@gmail.com?subject=[어스컴퍼니] 멤버십 상담 문의" style="color: white; text-decoration: underline;">yoonjae790510@gmail.com</a> 으로 직접 메일 주셔도 됩니다.</p>
                     </div>
                 </div>
             </div>
@@ -89,5 +246,56 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script>
+        function submitInquiry(event) {
+            event.preventDefault();
+            const f = document.getElementById('inquiry-form');
+            const v = (id) => {
+                const el = f.elements[id];
+                if (!el) return '';
+                if (el.type === 'radio' || (el.length && el[0] && el[0].type === 'radio')) {
+                    const checked = f.querySelector('input[name="' + id + '"]:checked');
+                    return checked ? checked.value : '';
+                }
+                return (el.value || '').trim();
+            };
+            const dash = (s) => s && s.length ? s : '-';
+
+            const subject = '[어스컴퍼니] 멤버십 상담 문의 - ' + dash(v('guardian_name'));
+
+            const lines = [
+                '[보호자 정보]',
+                '- 성함: ' + dash(v('guardian_name')),
+                '- 연락처: ' + dash(v('contact_phone')),
+                '- 회신 이메일: ' + dash(v('contact_email')),
+                '- 거주 지역: ' + dash(v('region')),
+                '',
+                '[반려동물 정보]',
+                '- 이름: ' + dash(v('pet_name')),
+                '- 종: ' + dash(v('pet_species')),
+                '- 품종: ' + dash(v('pet_breed')),
+                '- 나이: ' + dash(v('pet_age')),
+                '- 체중: ' + dash(v('pet_weight')),
+                '- 성별: ' + dash(v('pet_sex')),
+                '- 중성화 여부: ' + dash(v('pet_neutered')),
+                '- 주요 건강 이슈 / 특이사항:',
+                dash(v('pet_health')),
+                '',
+                '[문의 내용]',
+                dash(v('inquiry')),
+                '',
+                '---',
+                '* 어스컴퍼니 홈페이지 문의 양식으로 발송된 메일입니다.'
+            ];
+
+            const body = lines.join('\n');
+            const mailto = 'mailto:yoonjae790510@gmail.com'
+                + '?subject=' + encodeURIComponent(subject)
+                + '&body=' + encodeURIComponent(body);
+
+            window.location.href = mailto;
+            return false;
+        }
+    </script>
 </body>
 </html>
