@@ -1,0 +1,3 @@
+- [어스컴퍼니 사업 개요](project_earth_company_overview.md) — 반려동물 프리미엄 케어 멤버십, 결제 분리 모델로 수의사법·세무 리스크 최소화
+- [제휴 병원 문구 수정 보류](project_partner_hospital_wording.md) — "제휴 병원" 표현을 자가 병원 공개 톤으로 교체하기로 한 미반영 작업
+- [사전 자문 로드맵](project_legal_consultation.md) — 론칭 전 변호사 → 농림부 → 국세청 순 자문. 수의사회는 Skip 결정
