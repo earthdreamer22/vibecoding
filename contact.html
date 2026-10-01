@@ -126,32 +126,44 @@
                 <div style="max-width: 720px; margin: 0 auto;">
                     <h2 style="color: var(--deep-blue); margin-bottom: 1rem; text-align: center;">상담 문의</h2>
                     <p style="text-align: center; color: var(--gray-700); margin-bottom: 2.5rem;">
-                        아래 양식을 작성해 주시면 대표 수의사가 직접 확인하고 회신드립니다.<br>
-                        <small>작성 후 전송 버튼을 누르면 메일 앱이 열립니다.</small>
+                        아래 양식을 작성해 주시면 대표 수의사가 직접 확인하고 회신드립니다.
                     </p>
 
-                    <form class="card inquiry-form" id="inquiry-form" onsubmit="return submitInquiry(event)">
+                    <div id="sent-banner" style="display: none; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; padding: 1.25rem 1.5rem; border-radius: 8px; margin-bottom: 2rem; text-align: center;">
+                        <strong>문의가 정상적으로 전송되었습니다.</strong><br>
+                        <span style="font-size: 0.95rem;">3영업일 이내로 대표 수의사가 직접 회신드리겠습니다.</span>
+                    </div>
+
+                    <form class="card inquiry-form" id="inquiry-form"
+                          action="https://formsubmit.co/yoonjae790510@gmail.com"
+                          method="POST">
+                        <input type="hidden" name="_subject" value="[어스컴퍼니] 멤버십 상담 문의">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="https://earthdreamer22.github.io/vibecoding/contact.html?sent=1">
+                        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
                         <div class="form-group">
-                            <label for="guardian_name">보호자 성함<span class="req">*</span></label>
-                            <input type="text" id="guardian_name" name="guardian_name" required>
+                            <label for="보호자_성함">보호자 성함<span class="req">*</span></label>
+                            <input type="text" id="보호자_성함" name="보호자_성함" required>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="contact_phone">연락처</label>
-                                <input type="text" id="contact_phone" name="contact_phone" placeholder="010-0000-0000">
+                                <label for="연락처">연락처</label>
+                                <input type="text" id="연락처" name="연락처" placeholder="010-0000-0000">
                             </div>
                             <div class="form-group">
-                                <label for="contact_email">회신 이메일<span class="req">*</span></label>
-                                <input type="email" id="contact_email" name="contact_email" required>
+                                <label for="회신_이메일">회신 이메일<span class="req">*</span></label>
+                                <input type="email" id="회신_이메일" name="회신_이메일" required>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="region">거주 지역<span class="req">*</span>
+                            <label for="거주_지역">거주 지역<span class="req">*</span>
                                 <span class="field-desc">예) 대구 수성구, 경북 경산시</span>
                             </label>
-                            <input type="text" id="region" name="region" required>
+                            <input type="text" id="거주_지역" name="거주_지역" required>
                         </div>
 
                         <hr style="border: none; border-top: 1px solid var(--gray-200); margin: 2rem 0;">
@@ -159,14 +171,14 @@
                         <h3 style="color: var(--deep-blue); margin-bottom: 1.25rem; font-size: 1.05rem;">반려동물 정보</h3>
 
                         <div class="form-group">
-                            <label for="pet_name">이름<span class="req">*</span></label>
-                            <input type="text" id="pet_name" name="pet_name" required>
+                            <label for="반려동물_이름">이름<span class="req">*</span></label>
+                            <input type="text" id="반려동물_이름" name="반려동물_이름" required>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="pet_species">종<span class="req">*</span></label>
-                                <select id="pet_species" name="pet_species" required>
+                                <label for="종">종<span class="req">*</span></label>
+                                <select id="종" name="종" required>
                                     <option value="">선택</option>
                                     <option value="강아지">강아지</option>
                                     <option value="고양이">고양이</option>
@@ -174,19 +186,19 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="pet_breed">품종</label>
-                                <input type="text" id="pet_breed" name="pet_breed" placeholder="예) 말티즈, 코리안숏헤어">
+                                <label for="품종">품종</label>
+                                <input type="text" id="품종" name="품종" placeholder="예) 말티즈, 코리안숏헤어">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="pet_age">나이</label>
-                                <input type="text" id="pet_age" name="pet_age" placeholder="예) 3년 6개월">
+                                <label for="나이">나이</label>
+                                <input type="text" id="나이" name="나이" placeholder="예) 3년 6개월">
                             </div>
                             <div class="form-group">
-                                <label for="pet_weight">체중</label>
-                                <input type="text" id="pet_weight" name="pet_weight" placeholder="예) 4.2kg">
+                                <label for="체중">체중</label>
+                                <input type="text" id="체중" name="체중" placeholder="예) 4.2kg">
                             </div>
                         </div>
 
@@ -194,37 +206,37 @@
                             <div class="form-group">
                                 <label>성별</label>
                                 <div class="radio-group">
-                                    <label><input type="radio" name="pet_sex" value="수컷"> 수컷</label>
-                                    <label><input type="radio" name="pet_sex" value="암컷"> 암컷</label>
+                                    <label><input type="radio" name="성별" value="수컷"> 수컷</label>
+                                    <label><input type="radio" name="성별" value="암컷"> 암컷</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>중성화 여부</label>
                                 <div class="radio-group">
-                                    <label><input type="radio" name="pet_neutered" value="O"> 완료</label>
-                                    <label><input type="radio" name="pet_neutered" value="X"> 미완료</label>
+                                    <label><input type="radio" name="중성화" value="완료"> 완료</label>
+                                    <label><input type="radio" name="중성화" value="미완료"> 미완료</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="pet_health">주요 건강 이슈 또는 특이사항
+                            <label for="건강_이슈">주요 건강 이슈 또는 특이사항
                                 <span class="field-desc">진단받은 질환, 복용 중인 약, 알레르기, 과거 수술 이력 등</span>
                             </label>
-                            <textarea id="pet_health" name="pet_health"></textarea>
+                            <textarea id="건강_이슈" name="건강_이슈"></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="inquiry">문의 내용<span class="req">*</span>
+                            <label for="문의_내용">문의 내용<span class="req">*</span>
                                 <span class="field-desc">궁금한 점이나 지금 가장 고민되는 부분을 편하게 적어주세요.</span>
                             </label>
-                            <textarea id="inquiry" name="inquiry" required></textarea>
+                            <textarea id="문의_내용" name="문의_내용" required></textarea>
                         </div>
 
                         <div class="submit-row">
-                            <button type="submit" class="btn">메일로 보내기</button>
+                            <button type="submit" class="btn">문의 보내기</button>
                             <p style="text-align: center; color: var(--gray-700); font-size: 0.85rem; margin-top: 0.75rem;">
-                                전송 버튼을 누르면 작성한 내용이 자동으로 정리되어 메일 앱이 열립니다.
+                                전송 버튼을 누르면 작성하신 내용이 어스컴퍼니로 바로 전송됩니다.
                             </p>
                         </div>
                     </form>
@@ -247,55 +259,16 @@
 
     <script src="js/script.js"></script>
     <script>
-        function submitInquiry(event) {
-            event.preventDefault();
-            const f = document.getElementById('inquiry-form');
-            const v = (id) => {
-                const el = f.elements[id];
-                if (!el) return '';
-                if (el.type === 'radio' || (el.length && el[0] && el[0].type === 'radio')) {
-                    const checked = f.querySelector('input[name="' + id + '"]:checked');
-                    return checked ? checked.value : '';
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('sent') === '1') {
+                const banner = document.getElementById('sent-banner');
+                if (banner) {
+                    banner.style.display = 'block';
+                    banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
-                return (el.value || '').trim();
-            };
-            const dash = (s) => s && s.length ? s : '-';
-
-            const subject = '[어스컴퍼니] 멤버십 상담 문의 - ' + dash(v('guardian_name'));
-
-            const lines = [
-                '[보호자 정보]',
-                '- 성함: ' + dash(v('guardian_name')),
-                '- 연락처: ' + dash(v('contact_phone')),
-                '- 회신 이메일: ' + dash(v('contact_email')),
-                '- 거주 지역: ' + dash(v('region')),
-                '',
-                '[반려동물 정보]',
-                '- 이름: ' + dash(v('pet_name')),
-                '- 종: ' + dash(v('pet_species')),
-                '- 품종: ' + dash(v('pet_breed')),
-                '- 나이: ' + dash(v('pet_age')),
-                '- 체중: ' + dash(v('pet_weight')),
-                '- 성별: ' + dash(v('pet_sex')),
-                '- 중성화 여부: ' + dash(v('pet_neutered')),
-                '- 주요 건강 이슈 / 특이사항:',
-                dash(v('pet_health')),
-                '',
-                '[문의 내용]',
-                dash(v('inquiry')),
-                '',
-                '---',
-                '* 어스컴퍼니 홈페이지 문의 양식으로 발송된 메일입니다.'
-            ];
-
-            const body = lines.join('\n');
-            const mailto = 'mailto:yoonjae790510@gmail.com'
-                + '?subject=' + encodeURIComponent(subject)
-                + '&body=' + encodeURIComponent(body);
-
-            window.location.href = mailto;
-            return false;
-        }
+            }
+        })();
     </script>
 </body>
 </html>
