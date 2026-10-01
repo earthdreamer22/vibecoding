@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - 어스컴퍼니(신윤재)</title>
+    <title>문의 - 어스컴퍼니</title>
+    <meta name="description" content="어스컴퍼니 프리미엄 반려동물 케어 멤버십 상담 문의.">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
 </head>
 <body>
     <nav>
@@ -12,12 +14,10 @@
             <a href="index.html" class="logo">어스컴퍼니</a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="food.html">밥뭐먹지?</a></li>
-                <li><a href="movieTMDB.html">Movies</a></li>
-                <li><a href="glamping.html">Glamping</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="services.html">서비스</a></li>
+                <li><a href="membership.html">멤버십</a></li>
+                <li><a href="about.html">대표소개</a></li>
+                <li><a href="contact.html">문의</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -30,30 +30,57 @@
     <main>
         <section class="hero" style="padding: 4rem 2rem; min-height: auto;">
             <div class="hero-content">
-                <h1>Contact Me</h1>
-                <p>함께 성장하고 싶습니다</p>
+                <h1>Contact</h1>
+                <p>반려동물의 평생을 함께 설계할 준비가 되어 있습니다</p>
             </div>
         </section>
 
         <section class="section">
             <div class="container">
-                <div class="contact-info">
-                    <h2 style="color: var(--deep-blue); margin-bottom: 2rem;">연락하기</h2>
-                    
-                    <div style="margin-bottom: 2rem;">
-                        <h3 style="margin-bottom: 1rem;">📧 이메일</h3>
-                        <p><a href="mailto:yoonjae790510@gmail.com" onclick="copyEmail()">yoonjae790510@gmail.com</a></p>
-                        <small>클릭하면 이메일 주소가 복사됩니다</small>
+                <div class="contact-info" style="max-width: 720px; margin: 0 auto;">
+                    <h2 style="color: var(--deep-blue); margin-bottom: 1.5rem; text-align: center;">상담 문의</h2>
+                    <p style="text-align: center; color: var(--gray-700); margin-bottom: 2.5rem;">
+                        아래 이메일로 반려동물 정보와 함께 문의해 주시면<br>
+                        대표 수의사가 직접 회신드립니다.
+                    </p>
+
+                    <div class="card" style="margin-bottom: 1.5rem;">
+                        <h3 style="color: var(--deep-blue); margin-bottom: 1rem;">📧 문의 이메일</h3>
+                        <p style="margin-bottom: 0.5rem;">
+                            <a href="mailto:yoonjae790510@gmail.com?subject=[어스컴퍼니] 멤버십 상담 문의" onclick="copyEmail()" style="color: var(--deep-blue); font-size: 1.15rem; font-weight: 600;">yoonjae790510@gmail.com</a>
+                        </p>
+                        <small style="color: var(--gray-700);">클릭하면 메일 작성 창이 열립니다.</small>
                     </div>
 
-                    <div style="margin-bottom: 2rem;">
-                        <h3 style="margin-bottom: 1rem;">💻 GitHub</h3>
-                        <p><a href="https://github.com/earthdreamer22" target="_blank">github.com/earthdreamer22</a></p>
+                    <div class="card" style="margin-bottom: 1.5rem;">
+                        <h3 style="color: var(--deep-blue); margin-bottom: 1rem;">✏️ 문의 시 아래 정보를 함께 보내주시면 좋아요</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0;">🐶</span>
+                                반려동물 이름 / 종(강아지·고양이) / 품종
+                            </li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0;">🎂</span>
+                                나이, 체중, 성별, 중성화 여부
+                            </li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0;">🩺</span>
+                                주요 건강 이슈 또는 특이사항
+                            </li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0;">📍</span>
+                                거주 지역
+                            </li>
+                            <li style="margin-bottom: 0; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0;">💭</span>
+                                궁금하신 점 또는 지금 가장 고민되는 부분
+                            </li>
+                        </ul>
                     </div>
 
-                    <div style="background: linear-gradient(135deg, var(--deep-blue) 0%, var(--light-blue) 100%); color: white; padding: 2rem; border-radius: 12px; margin-top: 3rem;">
-                        <h3 style="margin-bottom: 1rem;">🤝 함께 만들어가요</h3>
-                        <p>수의사로서의 전문성과 개발자로서의 성장 과정을 공유하며, 더 나은 세상을 만들어가는 프로젝트에 함께하고 싶습니다.</p>
+                    <div style="background: linear-gradient(135deg, var(--deep-blue) 0%, var(--light-blue) 100%); color: white; padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center;">
+                        <h3 style="margin-bottom: 1rem;">🤝 1영업일 이내 회신</h3>
+                        <p style="opacity: 0.95;">문의 주신 내용은 대표 수의사가 직접 확인하고 1영업일 이내 회신드리는 것을 원칙으로 합니다.</p>
                     </div>
                 </div>
             </div>
@@ -62,7 +89,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 어스컴퍼니(신윤재). 바이브코딩과 함께 성장하는 개발자.</p>
+            <p>&copy; 2026 어스컴퍼니. 반려동물 프리미엄 케어 서비스.</p>
         </div>
     </footer>
 
