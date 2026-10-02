@@ -221,16 +221,48 @@
 
                         <div class="form-group">
                             <label for="건강_이슈">주요 건강 이슈 또는 특이사항
-                                <span class="field-desc">진단받은 질환, 복용 중인 약, 알레르기, 과거 수술 이력 등</span>
+                                <span class="field-desc">알레르기, 과거 수술 이력, 복용 중인 약 등</span>
                             </label>
                             <textarea id="건강_이슈" name="건강_이슈"></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="문의_내용">문의 내용<span class="req">*</span>
-                                <span class="field-desc">궁금한 점이나 지금 가장 고민되는 부분을 편하게 적어주세요.</span>
+                            <label for="현재_진단명">현재 진단명
+                                <span class="field-desc">아는 범위에서 적어 주세요. 모르시면 "모름"으로 적어주셔도 됩니다.</span>
                             </label>
-                            <textarea id="문의_내용" name="문의_내용" required></textarea>
+                            <input type="text" id="현재_진단명" name="현재_진단명" placeholder="예) 만성신부전 2단계 / 모름">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="병원_종류">현재 다니는 병원 종류<span class="req">*</span></label>
+                            <select id="병원_종류" name="병원_종류" required>
+                                <option value="">선택</option>
+                                <option value="1차 동물병원">1차 동물병원</option>
+                                <option value="2차(전문·대학) 병원">2차(전문·대학) 병원</option>
+                                <option value="둘 다">둘 다</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>2차 병원 전원 또는 수술 권유를 받았는지<span class="req">*</span></label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="전원_수술_권유" value="예" required> 예</label>
+                                <label><input type="radio" name="전원_수술_권유" value="아니요"> 아니요</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="도움받고_싶은_것">가장 도움받고 싶은 것<span class="req">*</span>
+                                <span class="field-desc">지금 가장 고민되는 부분을 편하게 적어주세요.</span>
+                            </label>
+                            <textarea id="도움받고_싶은_것" name="도움받고_싶은_것" required></textarea>
+                        </div>
+
+                        <div class="form-group" style="padding: 1rem 1.25rem; background: var(--gray-100); border-radius: 8px;">
+                            <label style="display: flex; gap: 0.75rem; align-items: flex-start; font-weight: 400; cursor: pointer;">
+                                <input type="checkbox" name="정보공유_동의" value="동의" required style="margin-top: 0.3rem; accent-color: var(--deep-blue);">
+                                <span style="color: var(--gray-900); font-size: 0.95rem; line-height: 1.6;">담당 동물병원과의 소통을 위해 진료 정보 공유에 동의합니다. (상담 시 별도 동의서 작성)<span class="req">*</span></span>
+                            </label>
                         </div>
 
                         <div class="submit-row">
@@ -240,6 +272,15 @@
                             </p>
                         </div>
                     </form>
+
+                    <!-- TODO: 카카오톡 채널 URL이 생기면 아래 블록의 주석을 해제하고 href 값을 입력하세요. -->
+                    <!--
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: #FEE500; border-radius: 12px; text-align: center;">
+                        <h3 style="color: #3C1E1E; margin-bottom: 0.75rem;">카카오톡으로 간편 신청하기</h3>
+                        <p style="color: #3C1E1E; opacity: 0.85; margin-bottom: 1rem; font-size: 0.95rem;">양식 작성이 번거로우시면 카카오톡 채널로도 문의하실 수 있습니다.</p>
+                        <a href="[TODO: 카카오톡 채널 URL 입력]" target="_blank" style="display: inline-block; padding: 0.75rem 1.5rem; background: #3C1E1E; color: #FEE500; border-radius: 6px; text-decoration: none; font-weight: 600;">카카오톡 채널 열기</a>
+                    </div>
+                    -->
 
                     <div style="background: linear-gradient(135deg, var(--deep-blue) 0%, var(--light-blue) 100%); color: white; padding: 2rem; border-radius: 12px; margin-top: 2.5rem; text-align: center;">
                         <h3 style="margin-bottom: 1rem;">3영업일 이내 회신</h3>
@@ -253,7 +294,8 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 어스컴퍼니. 반려동물 프리미엄 케어 서비스.</p>
+            <p style="font-size: 0.9rem; color: var(--gray-700); margin-bottom: 0.75rem;">어스컴퍼니의 온라인 서비스는 진단·처방이 아닌 수의학적 자문·상담입니다. 진단과 치료는 담당 동물병원에서 이루어집니다.</p>
+            <p>&copy; 2026 어스컴퍼니. 반려동물 전담 수의사 컨설팅.</p>
         </div>
     </footer>
 
