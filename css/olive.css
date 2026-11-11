@@ -1,0 +1,105 @@
+/* 올리브동물병원 — 첫 페이지 */
+:root {
+  --olive: #6b7d2c;
+  --olive-dark: #455220;
+  --olive-soft: #eef1e2;
+  --cream: #faf8f1;
+  --ink: #23271a;
+  --muted: #6b6f60;
+  --line: #e3e5d8;
+  --radius: 14px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  margin: 0; color: var(--ink); background: #fff; line-height: 1.65;
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased; word-break: keep-all;
+}
+a { color: var(--olive-dark); }
+.ol-wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+/* 머리 */
+.ol-header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.ol-header-in { display: flex; align-items: center; gap: 24px; height: 64px; }
+.ol-logo { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.2rem; color: var(--olive-dark); text-decoration: none; }
+.ol-logo svg { width: 34px; height: 34px; }
+.ol-nav { display: flex; gap: 22px; margin-left: auto; }
+.ol-nav a { color: var(--ink); text-decoration: none; font-size: .95rem; }
+.ol-nav a:hover { color: var(--olive); }
+
+/* 버튼 */
+.ol-btn { display: inline-block; padding: 12px 22px; border-radius: 999px; background: var(--olive); color: #fff; text-decoration: none; font-weight: 700; border: 2px solid var(--olive); transition: background .2s, color .2s; }
+.ol-btn:hover { background: var(--olive-dark); border-color: var(--olive-dark); }
+.ol-btn-sm { padding: 8px 16px; font-size: .9rem; }
+.ol-btn-ghost { background: transparent; color: var(--olive-dark); }
+.ol-btn-ghost:hover { background: var(--olive-soft); color: var(--olive-dark); }
+
+/* 첫 화면 */
+.ol-hero {
+  background:
+    radial-gradient(1100px 420px at 85% -10%, rgba(138,156,69,.28), transparent 60%),
+    radial-gradient(700px 360px at -10% 110%, rgba(107,125,44,.18), transparent 60%),
+    var(--cream);
+  padding: 96px 0 88px;
+}
+.ol-eyebrow { display: inline-block; margin: 0 0 14px; padding: 4px 12px; border-radius: 999px; background: var(--olive-soft); color: var(--olive-dark); font-weight: 700; font-size: .9rem; }
+.ol-hero h1 { margin: 0 0 18px; font-size: clamp(1.9rem, 4.2vw, 3rem); line-height: 1.3; letter-spacing: -.02em; }
+.ol-lead { margin: 0 0 30px; color: var(--muted); font-size: 1.1rem; }
+.ol-hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* 구획 */
+.ol-section { padding: 72px 0; }
+.ol-section-tint { background: var(--cream); }
+.ol-h2 { margin: 0 0 6px; font-size: 1.7rem; letter-spacing: -.01em; }
+.ol-sub { margin: 0 0 28px; color: var(--muted); }
+
+/* 진료시간·공지 (VetChart가 채우는 칸) */
+#vetchart-clinic-info { max-width: 1032px !important; margin: 0 auto !important; border-color: var(--line) !important; box-shadow: 0 6px 24px rgba(69,82,32,.06); }
+#vetchart-clinic-info .vc-title { display: none; }
+#vetchart-clinic-info .vc-notice { border-left-color: var(--olive) !important; background: var(--olive-soft) !important; }
+#vetchart-clinic-info td:first-child { font-weight: 700; color: var(--olive-dark); white-space: nowrap; }
+
+/* 진료 안내 카드 */
+.ol-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.ol-card { padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+.ol-card h3 { margin: 10px 0 6px; font-size: 1.1rem; }
+.ol-card p { margin: 0; color: var(--muted); font-size: .97rem; }
+.ol-ico { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: var(--olive-soft); font-size: 1.3rem; }
+
+/* 장비 */
+.ol-equip { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.ol-equip li { padding: 20px; border-radius: var(--radius); background: #fff; border: 1px solid var(--line); }
+.ol-equip strong { display: block; margin-bottom: 4px; }
+.ol-equip span { color: var(--muted); font-size: .95rem; }
+
+/* 연락처 */
+.ol-contact { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+.ol-phone { font-size: 2.2rem; font-weight: 800; text-decoration: none; color: var(--olive-dark); letter-spacing: .01em; }
+.ol-contact-box { padding: 24px; border-radius: var(--radius); background: var(--cream); border: 1px solid var(--line); }
+.ol-contact-box p { margin: 6px 0; }
+.ol-contact-box strong { display: inline-block; min-width: 110px; color: var(--olive-dark); }
+.ol-muted { color: var(--muted); font-size: .92rem; }
+
+/* 바닥 */
+.ol-footer { padding: 36px 0; background: var(--olive-dark); color: #e9ecdc; }
+.ol-footer a, .ol-footer strong { color: #fff; }
+.ol-footer p { margin: 4px 0; }
+.ol-footer .ol-muted { color: #c9cfb3; }
+
+@media (max-width: 860px) {
+  .ol-nav { display: none; }
+  .ol-header-in .ol-btn-sm { margin-left: auto; }
+  #vetchart-clinic-info { margin: 0 16px !important; padding: 16px !important; }
+  .ol-cards { grid-template-columns: 1fr 1fr; }
+  .ol-equip { grid-template-columns: 1fr 1fr; }
+  .ol-contact { grid-template-columns: 1fr; }
+  .ol-br { display: none; }
+}
+@media (max-width: 540px) {
+  .ol-header-in { gap: 12px; }
+  .ol-hero { padding: 64px 0 56px; }
+  .ol-cards, .ol-equip { grid-template-columns: 1fr; }
+  .ol-section { padding: 56px 0; }
+  .ol-phone { font-size: 1.8rem; }
+}

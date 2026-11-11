@@ -3,6 +3,17 @@
 (function () {
   var box = document.getElementById('vetchart-clinic-info');
   if (!box) return;
+
+  /* 페이지 곳곳의 data-vc="clinic_name|phone|address" 자리도 데이터 파일 값으로 (전화 링크는 tel:) */
+  function fillSlots(d) {
+    var nodes = document.querySelectorAll('[data-vc]');
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i], k = n.getAttribute('data-vc'), v = d[k];
+      if (!v) continue;
+      if (k === 'phone' && n.tagName === 'A') n.setAttribute('href', 'tel:' + String(v).replace(/[^0-9+]/g, ''));
+      if (n.getAttribute('data-vc-text') !== 'keep') n.textContent = (n.getAttribute('data-vc-prefix') || '') + v;
+    }
+  }
   var src = (document.currentScript && document.currentScript.getAttribute('data-src')) || 'content/clinic.json';
 
   var css = '#vetchart-clinic-info{max-width:960px;margin:32px auto;padding:20px 24px;border:1px solid #e5e7eb;border-radius:12px;' +
@@ -35,6 +46,7 @@
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (d) {
       if (!d) return;
+      fillSlots(d);
       var t = today();
       var notices = (d.notices || []).filter(function (n) {
         return (!n.from || n.from <= t) && (!n.to || t <= n.to);
