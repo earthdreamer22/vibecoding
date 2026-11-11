@@ -7,6 +7,7 @@
 
   var css = '#vetchart-clinic-info{max-width:960px;margin:32px auto;padding:20px 24px;border:1px solid #e5e7eb;border-radius:12px;' +
     'font-family:inherit;line-height:1.6;background:#fff;color:#1f2937}' +
+    '#vetchart-clinic-info .vc-title{margin:0 0 12px;font-size:1.35em}' +
     '#vetchart-clinic-info h3{margin:0 0 8px;font-size:1.1em}' +
     '#vetchart-clinic-info .vc-sec{margin:12px 0}' +
     '#vetchart-clinic-info table{border-collapse:collapse}' +
@@ -43,6 +44,7 @@
       var hours = d.hours || [];
       if (!notices.length && !closed.length && !hours.length) return;
 
+      if (d.clinic_name) box.appendChild(el('h2', d.clinic_name + ' 진료 안내', 'vc-title'));
       if (notices.length) {
         var s1 = el('div', null, 'vc-sec');
         s1.appendChild(el('h3', '공지'));
